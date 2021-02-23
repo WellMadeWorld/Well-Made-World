@@ -164,6 +164,11 @@ const compoundQueryOne = (category) => {
         setupButtons();
         
         html = '';
+	itemTags.forEach(tag => {
+            const filterButton = `<div class="catalog-filter-button" style="display: inline-block;" id="${tag}FilterButton">${tag}</div>`
+            html += filterButton;
+        })
+        thirdFilters.innerHTML = html;
     })
 }
 
