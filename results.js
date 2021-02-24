@@ -163,7 +163,6 @@ const compoundQueryOne = (category) => {
         allItems.splice(0,6)
         setupButtons();
         
-	console.log('...')
         html = '';
 	itemTags.forEach(tag => {
             const filterButton = `<div class="catalog-filter-button" style="display: inline-block;" id="${tag}FilterButton">${tag}</div>`
