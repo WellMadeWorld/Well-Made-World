@@ -303,7 +303,7 @@ itemImage.addEventListener('click', (e) => {
 })
 
 entirePage.addEventListener('click', (e) => {
-	if(e.target.matches(".filter-text-block")) {
+	if(e.target.matches(".catalog-filter-button")) {
   	filterItems(e.target.id);
   }
 })
