@@ -304,8 +304,10 @@ itemImage.addEventListener('click', (e) => {
 
 entirePage.addEventListener('click', (e) => {
 	if(e.target.matches(".catalog-filter-button")) {
-  	filterItems(e.target.id);
-  }
+        filterItems(e.target.id);
+        secondFilters.style.display = "block";
+        thirdFilters.style.display = "none";
+    }
 })
 
 contentContainer.addEventListener('click', (e) => {
@@ -320,6 +322,7 @@ contentContainer.addEventListener('click', (e) => {
 secondFilters.addEventListener('click', (e) => {
   if (e.target.matches(".catalog-filter-button")) {
     compoundQueryOne(e.target.id.substring(0,e.target.id.length - 12))
+    thirdFilters.style.display = "block";
   }
 })
 
