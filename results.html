@@ -82,13 +82,13 @@ const setupButtons = () => {
 }
 
 let currentFilter = '';
-let itemCategories = [];
+let itemCategories = {};
 let allItems = [];
 let lastItems = [];
 let currentItems = [];
 
 const filterItems = (category) => {
-    itemCategories = [];
+    itemCategories = {};
     allItems = [];
     currentItems = [];
     lastItems = [];
@@ -99,12 +99,13 @@ const filterItems = (category) => {
     .then((snapshot) => {
         let itemsDoc = snapshot.docs;
         itemsDoc.forEach(doc => {
- 						item = doc.data();
+ 	    item = doc.data();
             allItems.push(doc);
-            if (itemCategories.includes(item.item_category)) {
+            if (!(item.item_category in itemCategories)) {
+                itemCategories[item.item_category] = 1;
             } else {
-                itemCategories.push(item.item_category)
-            };
+                itemCategories[item.item_category] = itemCategories[item.item_category] += 1
+            }
         })
         for (i = 0; i < allItems.length; i++) {
             if (i == 12) {
@@ -119,10 +120,10 @@ const filterItems = (category) => {
         console.log(itemCategories);
         
         html = '';
-        itemCategories.forEach(category => {
-            const filterButton = `<div class="catalog-filter-button" style="display: inline-block;" id="${category}FilterButton">${category}</div>`
+        for(var key in itemCategories) {
+            const filterButton = `<button class="filter-button" value="${key}">${key} (${itemCategories[key]})</button>`
             html += filterButton;
-        })
+        }
         secondFilterContainer.innerHTML = html;
     })
 }
