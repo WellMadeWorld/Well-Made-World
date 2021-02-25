@@ -129,10 +129,10 @@ const filterItems = (category) => {
 }
 
 let secondFilter = '';
-let itemTags = [];
+let itemTags = {};
 
 const compoundQueryOne = (category) => {
-    itemTags = [];
+    itemTags = {};
     allItems = [];
     currentItems = [];
     lastItems = [];
@@ -146,13 +146,14 @@ const compoundQueryOne = (category) => {
     .then((snapshot) => {
         let itemsDoc = snapshot.docs;
         itemsDoc.forEach(doc => {
-        		item = doc.data();
+            item = doc.data();
             allItems.push(doc);
             for(var key in item.filter_tags) {
-                if(itemTags.includes(key)) {
+                if (!(key in itemTags)) {
+                    itemTags[key] = 1;
                 } else {
-                    itemTags.push(key);
-                };
+                    itemTags[key] = itemTags[key] += 1
+                }
             }
         })
         for (i = 0; i < allItems.length; i++) {
@@ -166,8 +167,8 @@ const compoundQueryOne = (category) => {
         setupButtons();
         
         html = '';
-	    itemTags.forEach(tag => {
-            const filterButton = `<div class="catalog-filter-button" style="display: inline-block;" id="${tag}FilterButton">${tag}</div>`
+	    for(var key in itemTags) {
+            const filterButton = `<div class="catalog-filter-button" style="display: inline-block;" id="${key}FilterButton">${key} (${itemTags[key]})</div>`
             html += filterButton;
         })
         thirdFilterContainer.innerHTML = html;
