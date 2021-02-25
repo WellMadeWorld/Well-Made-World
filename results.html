@@ -170,7 +170,7 @@ const compoundQueryOne = (category) => {
 	    for(var key in itemTags) {
             const filterButton = `<div class="catalog-filter-button" style="display: inline-block;" id="${key}FilterButton">${key} (${itemTags[key]})</div>`
             html += filterButton;
-        })
+        }
         thirdFilterContainer.innerHTML = html;
     })
 }
