@@ -173,6 +173,38 @@ const compoundQueryOne = (category) => {
     })
 }
 
+const compoundQueryTwo = (category) => {
+
+    allItems = [];
+    currentItems = [];
+    lastItems = [];
+
+    console.log(category);
+
+    var productsRef = db.collection('new_test_collection')
+    var subFilterQuery = productsRef.where('product_category', '==', currentFilter).where('item_category', '==', secondFilter).where('filter_tags.' + category, '==', true)
+
+    console.log(subFilterQuery)
+
+    subFilterQuery.get()
+    .then((snapshot) => {
+        console.log(snapshot.docs)
+        let itemsDoc = snapshot.docs;
+        itemsDoc.forEach(doc => {
+            allItems.push(doc);
+        })
+        for (i = 0; i < allItems.length; i++) {
+            if (i == 6) {
+                break;
+            }
+            currentItems.push(allItems[i])
+        }
+        setupResults(currentItems);
+        allItems.splice(0,6)
+        setupButtons();
+    })
+}
+
 const getNextItems = () => {
     if (lastItems.length == 0) {
         currentItems.forEach(doc => {
@@ -324,6 +356,12 @@ secondFilterContainer.addEventListener('click', (e) => {
   if (e.target.matches(".catalog-filter-button")) {
     compoundQueryOne(e.target.id.substring(0,e.target.id.length - 12))
     thirdFilterContainer.style.display = "block";
+  }
+})
+	
+thirdFilters.addEventListener('click', (e) => {
+  if (e.target.matches(".catalog-filter-button")) {
+    compoundQueryTwo(e.target.value)
   }
 })
 
