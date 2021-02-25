@@ -122,7 +122,7 @@ const filterItems = (category) => {
             const filterButton = `<div class="catalog-filter-button" style="display: inline-block;" id="${category}FilterButton">${category}</div>`
             html += filterButton;
         })
-        secondFilters.innerHTML = html;
+        secondFilterContainer.innerHTML = html;
     })
 }
 
@@ -164,11 +164,11 @@ const compoundQueryOne = (category) => {
         setupButtons();
         
         html = '';
-	itemTags.forEach(tag => {
+	    itemTags.forEach(tag => {
             const filterButton = `<div class="catalog-filter-button" style="display: inline-block;" id="${tag}FilterButton">${tag}</div>`
             html += filterButton;
         })
-        thirdFilters.innerHTML = html;
+        thirdFilterContainer.innerHTML = html;
     })
 }
 
@@ -305,8 +305,8 @@ itemImage.addEventListener('click', (e) => {
 entirePage.addEventListener('click', (e) => {
 	if(e.target.matches(".catalog-filter-button")) {
         filterItems(e.target.id);
-        secondFilters.style.display = "block";
-        thirdFilters.style.display = "none";
+        secondFilterContainer.style.display = "block";
+        thirdFilterContainer.style.display = "none";
     }
 })
 
@@ -319,10 +319,10 @@ contentContainer.addEventListener('click', (e) => {
   }
 })
 
-secondFilters.addEventListener('click', (e) => {
+secondFilterContainer.addEventListener('click', (e) => {
   if (e.target.matches(".catalog-filter-button")) {
     compoundQueryOne(e.target.id.substring(0,e.target.id.length - 12))
-    thirdFilters.style.display = "block";
+    thirdFilterContainer.style.display = "block";
   }
 })
 
