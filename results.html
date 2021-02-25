@@ -121,7 +121,7 @@ const filterItems = (category) => {
         
         html = '';
         for(var key in itemCategories) {
-            const filterButton = `<button class="filter-button" value="${key}">${key} (${itemCategories[key]})</button>`
+            const filterButton = `<div class="catalog-filter-button" style="display: inline-block;" id="${key}FilterButton">${key} (${itemCategories[key]})</div>`
             html += filterButton;
         }
         secondFilterContainer.innerHTML = html;
