@@ -339,6 +339,10 @@ itemImage.addEventListener('click', (e) => {
 
 firstFilterContainer.addEventListener('click', (e) => {
 	if(e.target.matches(".catalog-filter-button")) {
+	var firstFilters = document.querySelectorAll('.filter-button-1')
+        firstFilters.forEach(button => {
+	    button.classList.remove('clicked')
+        })
 	e.target.classList.add('clicked')
         filterItems(e.target.id);
         secondFilterContainer.style.display = "block";
