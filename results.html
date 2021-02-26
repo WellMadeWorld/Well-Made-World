@@ -338,7 +338,7 @@ itemImage.addEventListener('click', (e) => {
 })
 
 firstFilterContainer.addEventListener('click', (e) => {
-	if(e.target.matches(".catalog-filter-button")) {
+	if(e.target.matches(".catalog-filter-button-1")) {
 	var firstFilters = document.querySelectorAll('.filter-button-1')
         firstFilters.forEach(button => {
 	    button.classList.remove('clicked')
@@ -348,15 +348,6 @@ firstFilterContainer.addEventListener('click', (e) => {
         secondFilterContainer.style.display = "block";
         thirdFilterContainer.style.display = "none";
     }
-})
-
-contentContainer.addEventListener('click', (e) => {
-  if (e.target.matches("#resultNextButton")) {
-    getNextItems();
-  }
-  if (e.target.matches("#resultBackButton")) {
-    getLastItems();
-  }
 })
 
 secondFilterContainer.addEventListener('click', (e) => {
@@ -369,6 +360,15 @@ secondFilterContainer.addEventListener('click', (e) => {
 thirdFilterContainer.addEventListener('click', (e) => {
   if (e.target.matches(".catalog-filter-button")) {
     compoundQueryTwo(e.target.id.substring(0,e.target.id.length - 12))
+  }
+})
+	
+contentContainer.addEventListener('click', (e) => {
+  if (e.target.matches("#resultNextButton")) {
+    getNextItems();
+  }
+  if (e.target.matches("#resultBackButton")) {
+    getLastItems();
   }
 })
 
