@@ -363,7 +363,7 @@ secondFilterContainer.addEventListener('click', (e) => {
 	
 thirdFilterContainer.addEventListener('click', (e) => {
   if (e.target.matches(".catalog-filter-button")) {
-    compoundQueryTwo(e.target.value)
+    compoundQueryTwo(e.target.id.substring(0,e.target.id.length - 12))
   }
 })
 
