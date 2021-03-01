@@ -363,7 +363,13 @@ secondFilterContainer.addEventListener('click', (e) => {
 })
 	
 thirdFilterContainer.addEventListener('click', (e) => {
-  if (e.target.matches(".catalog-filter-button")) {
+  if (e.target.matches(".filter-button-3")) {
+    var thirdFilters = document.querySelectorAll('.filter-button-3')
+    thirdFilters.forEach(button => {
+	button.classList.remove('clicked')
+    })
+    e.target.classList.add("clicked")
+  if (e.target.matches(".catalog-filter-button-3")) {
     compoundQueryTwo(e.target.id.substring(0,e.target.id.length - 12))
   }
 })
