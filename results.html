@@ -121,7 +121,7 @@ const filterItems = (category) => {
         
         html = '';
         for(var key in itemCategories) {
-            const filterButton = `<div class="catalog-filter-button" style="display: inline-block;" id="${key}FilterButton">${key} (${itemCategories[key]})</div>`
+            const filterButton = `<div class="catalog-filter-button-2" style="display: inline-block;" id="${key}FilterButton">${key} (${itemCategories[key]})</div>`
             html += filterButton;
         }
         secondFilterContainer.innerHTML = html;
@@ -168,7 +168,7 @@ const compoundQueryOne = (category) => {
         
         html = '';
 	    for(var key in itemTags) {
-            const filterButton = `<div class="catalog-filter-button" style="display: inline-block;" id="${key}FilterButton">${key} (${itemTags[key]})</div>`
+            const filterButton = `<div class="catalog-filter-button-3" style="display: inline-block;" id="${key}FilterButton">${key} (${itemTags[key]})</div>`
             html += filterButton;
         }
         thirdFilterContainer.innerHTML = html;
