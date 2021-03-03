@@ -1,0 +1,237 @@
+<script>
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+  		$('.user-name').text(user.displayName);
+    }
+});
+</script>
+ 
+ <script>
+   const getCatalog = () => {
+   		var catalogRef =  db.collection('new_test_collection')
+      var newItemQuery = catalogRef.orderBy("name").limit(8);
+      newItemQuery.get()
+      .then((querySnapshot) => {
+          setupQueryItems(querySnapshot.docs, "newItemsGrid", "https://assets.website-files.com/6011846d13792869a7112a47/6011846d1379286222112cb5_Group%202248.png")
+      })
+      .catch((error) => {
+          console.log("Error getting documents: ", error);
+      });
+      var trendingItemQuery = catalogRef.orderBy("item_category", "desc").limit(8);
+      trendingItemQuery.get()
+      .then((querySnapshot) => {
+          setupQueryItems(querySnapshot.docs, "trendingItemsGrid", "https://assets.website-files.com/6011846d13792869a7112a47/601d98f09e99733b131e10f1_nnn.svg")
+      })
+      .catch((error) => {
+          console.log("Error getting documents: ", error);
+      });
+      var baggageItemQuery = catalogRef.where("item_category", "==", "Bags").limit(8);
+      baggageItemQuery.get()
+      .then((querySnapshot) => {
+          setupQueryItems(querySnapshot.docs, "baggageItemsGrid")
+      })
+      .catch((error) => {
+          console.log("Error getting documents: ", error);
+      });
+      var shoesItemQuery = catalogRef.where("item_category", "==", "Shoes").limit(8);
+      shoesItemQuery.get()
+      .then((querySnapshot) => {
+          setupQueryItems(querySnapshot.docs, "shoesItemGrid")
+      })
+      .catch((error) => {
+          console.log("Error getting documents: ", error);
+      });
+ 	}
+ </script>
+ 
+ <script>
+ 	const setupQueryItems = (data, category, banner) => {
+    if (data.length) {
+        let html = ''
+        data.forEach(doc => {
+            const product = doc.data();
+            if (banner === undefined) {
+            const gridElement = `
+            <div class='gridstyleblock'>
+                <a href='#' class="modal-trigger" data-target="modal-product">
+                <img src='${product.image_link}' class='catalog-image' id="${doc.id}" style="position: auto; height: 250px; width: 250px; border-radius: 25px">
+                </a>
+                </div>
+            `
+            html += gridElement
+            } else {
+            const gridElement = `
+            <div class='gridstyleblock'>
+            		<img src="${banner}" loading="lazy" width="55" alt class="new" style="position: relative; z-index: 1;">
+                <a href='#' class="modal-trigger" data-target="modal-product">
+                <img src='${product.image_link}' class='catalog-image' id="${doc.id}" style="position: relative; bottom: 50px; z-index: 0; height: 240px; width: 250px; border-radius: 25px">
+                </a>
+                </div>
+            `
+            html += gridElement
+            }
+        })
+        document.getElementById(category).innerHTML = html
+    } else {
+        document.getElementById(category).innerHTML = 'no items in the catalog'
+    }
+}
+
+getCatalog();
+</script>
+
+<script>
+  getItemFromCatalog = (id) => {
+      var docRef = db.collection("new_test_collection").doc(id);
+
+      docRef.get().then(function(doc) {
+          if (doc.exists) {
+              setupItemModal(doc.data(), id);
+          } else {
+              // doc.data() will be undefined in this case
+              console.log("No such document!");
+          }
+      }).catch(function(error) {
+          console.log("Error getting document:", error);
+      });
+  }   
+</script>
+
+<script>
+const setupItemModal = (data, id) => {
+		checkSavedStatus(id);
+    brandHeaders(data.brand_id)
+    let imageHtml = ''
+    let descriptionHtml = ''
+    const imageElement = `
+    <div id="product-image">
+        <img src="${data.image_link}" style="height: 250px; width: 250px;"/>
+        <div id='saveButtonDiv'>
+        </div>
+    </div>
+    `
+    const descriptionElement = `
+    <div id="product-description">
+        <p> ${data.description} </p>
+    </div>
+    `
+    
+    imageHtml += imageElement
+    descriptionHtml += descriptionElement
+    itemImage.innerHTML = imageHtml
+    itemDescription.innerHTML = descriptionHtml
+    productPrice.innerHTML = `$${data.price}`
+    purchaseLink.innerHTML = `<div class="product-button-2 d">
+    														<a href="${data.product_link}" class="link-block-51 _3 w-inline-block"> Buy now from ${data.brand}</a>
+                              </div>`
+		productName.innerHTML = `${data.name}`
+    itemMaterialIngredients.innerHTML = `${data.ingredients_materials}`
+}
+
+const brandHeaders = (brand) => {
+    var docRef = db.collection('brands').doc(brand)
+
+    docRef.get().then(function(doc) {
+        if (doc.exists) {
+            data = doc.data();
+						brandNameOne.innerHTML = `${data.name}`
+            brandDescriptionOne.innerHTML = `${data.description}`
+            brandImageOne.innerHTML = `<img src="${data.image_link}" style="height: 36px; width: 100px;"/>`
+            brandNameTwo.innerHTML = `${data.name}`
+            brandDescriptionTwo.innerHTML = `${data.description}`
+            brandImageTwo.innerHTML = `<img src="${data.image_link}" style="height: 36px; width: 100px;"/>`
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+}
+
+const saveItem = (e) => {
+    var docID = e.target.id.substring(10, e.target.id.length)
+    console.log(docID)
+    auth.onAuthStateChanged(user =>  {
+        if (user) {
+        
+        //Get a list of the IDs currently inside the user favorites document
+        let document_ids = []
+    
+        db.collection("users").doc(user.uid).collection('users_favorites').get().then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+                document_ids.push(doc.id);
+            });
+            console.log(document_ids)
+        });
+        
+        var item = db.collection("catalog").doc(docID)
+        var currentDoc = db.collection('users').doc(user.uid).collection('users_favorites').doc(docID)
+        item.get().then(function(doc) {
+            if(document_ids.includes(docID)) {
+                currentDoc.delete();
+            } else {
+                currentDoc.set(doc.data())
+            }
+            checkSavedStatus(docID)
+        })
+
+        } else {
+            console.log('user not logged in.')
+        }
+    })
+}
+
+const checkSavedStatus = (docID) => {
+    auth.onAuthStateChanged(user =>  {
+        if (user) {
+            var userFavs = db.collection('users').doc(user.uid).collection('users_favorites');
+            userFavs.get().then(function(snapShot) {
+                userFavoriteList = [];
+                snapShot.docs.forEach(doc => {
+                    userFavoriteList.push(doc.id)
+                })
+                if (userFavoriteList.includes(docID)) {
+                    saveButtonDiv.innerHTML = `<a href="#" id="save-item-${docID}" class="favorite-button">Unsave item</a>`
+                } else {
+                    saveButtonDiv.innerHTML = `<a href="#" id="save-item-${docID}" class="favorite-button">Save item</a>`
+                }
+            }) 
+        }
+    })
+}
+</script>
+
+ <script>
+ wholeCatalog.addEventListener('click', (e) => {
+    if (e.target.matches('.catalog-image')) {
+    		itemModal.style.display = "flex";
+        getItemFromCatalog(e.target.id)
+        $(function() {
+            $('.modal').fadeIn();
+            $('.modal-background').fadeIn();
+            e.stopPropagation();
+        });
+        $('.close-modal').click(function() {
+            $('.modal').fadeOut();
+            $('.modal-background').fadeOut();
+  			});
+         $('.modal-background').click(function() {
+            $('.modal').fadeOut();
+            $('.modal-background').fadeOut();
+        }); 
+     		 $(document).keydown(function (event) {
+            if (event.keyCode == 27) {
+              $('.modal').fadeOut();
+              $('.modal-background').fadeOut();
+            }
+      	});
+    }
+})
+
+itemImage.addEventListener('click', (e) => {
+  if(e.target.matches(".favorite-button")) {
+    saveItem(e)
+  }
+})
+</script>
