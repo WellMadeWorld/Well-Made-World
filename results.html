@@ -117,8 +117,6 @@ const filterItems = (category) => {
         allItems.splice(0,12)
         setupButtons();
         
-        console.log(itemCategories);
-        
         html = '';
         for(var key in itemCategories) {
             const filterButton = `<div class="catalog-filter-button-2" style="display: inline-block;" id="${key}FilterButton">${key} (${itemCategories[key]})</div>`
@@ -373,7 +371,7 @@ thirdFilterContainer.addEventListener('click', (e) => {
   }
 })
 	
-contentContainer.addEventListener('click', (e) => {
+entirePage.addEventListener('click', (e) => {
   if (e.target.matches("#resultNextButton")) {
     getNextItems();
   }
