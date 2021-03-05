@@ -92,7 +92,7 @@ const filterItems = (category) => {
     allItems = [];
     currentItems = [];
     lastItems = [];
-    var productsRef = db.collection('new_test_collection')
+    var productsRef = db.collection('catalog')
     var allItemsQuery = productsRef.where("product_category", "==", category);
     currentFilter = category
     allItemsQuery.get()
@@ -135,8 +135,8 @@ const compoundQueryOne = (category) => {
     currentItems = [];
     lastItems = [];
 
-    var productsRef = db.collection('new_test_collection')
-    var subFilterQuery = productsRef.where('item_category', "==", category).where('product_category', '==', currentFilter)
+    var productsRef = db.collection('catalog')
+    var subFilterQuery = productsRef.where('itemcategory', "==", category).where('product_category', '==', currentFilter)
 
     secondFilter = category;
 
@@ -182,7 +182,7 @@ const compoundQueryTwo = (category) => {
     console.log(category);
 
     var productsRef = db.collection('new_test_collection')
-    var subFilterQuery = productsRef.where('product_category', '==', currentFilter).where('item_category', '==', secondFilter).where('filter_tags.' + category, '==', true)
+    var subFilterQuery = productsRef.where('product_category', '==', currentFilter).where('itemcategory', '==', secondFilter).where('filtertags.' + category, '==', true)
 
     console.log(subFilterQuery)
 
