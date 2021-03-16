@@ -182,7 +182,7 @@ const compoundQueryTwo = (category) => {
     console.log(category);
 
     var productsRef = db.collection('new_catalog')
-    var subFilterQuery = productsRef.where('product_category', '==', currentFilter).where('item_category', '==', secondFilter).where('filtertags.' + category, '==', true)
+    var subFilterQuery = productsRef.where('product_category', '==', currentFilter).where('item_category', '==', secondFilter).where('filter_tags.' + category, '==', true)
 
     console.log(subFilterQuery)
 
