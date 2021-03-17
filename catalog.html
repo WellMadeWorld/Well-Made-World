@@ -41,6 +41,14 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
+      var mensFashionItemQuery = catalogRef.where("item_category", "==", "Men").limit(8);
+      mensFashionItemQuery.get()
+      .then((querySnapshot) => {
+          setupQueryItems(querySnapshot.docs, "mensFashionGrid")
+      })
+      .catch((error) => {
+          console.log("Error getting documents: ", error);
+      });
  	}
  </script>
  
@@ -54,7 +62,7 @@ firebase.auth().onAuthStateChanged((user) => {
             const gridElement = `
             <div class='gridstyleblock'>
                 <a href='#' class="modal-trigger" data-target="modal-product">
-                <img src='${product.image_link}' class='catalog-image' id="${doc.id}" style="position: auto; height: 250px; width: 250px; border-radius: 25px">
+                <img src='${product.image_link}' class='catalog-image' id="${doc.id}" style="position: auto; max-height: 200px; width: auto; border-radius: 25px;">
                 </a>
                 </div>
             `
@@ -62,9 +70,9 @@ firebase.auth().onAuthStateChanged((user) => {
             } else {
             const gridElement = `
             <div class='gridstyleblock'>
-            		<img src="${banner}" loading="lazy" width="55" alt class="new" style="position: relative; z-index: 1;">
+            		<img src="${banner}" loading="lazy" width="55" alt class="new" style="position: absolute; z-index: 1;">
                 <a href='#' class="modal-trigger" data-target="modal-product">
-                <img src='${product.image_link}' class='catalog-image' id="${doc.id}" style="position: relative; bottom: 50px; z-index: 0; height: 240px; width: 250px; border-radius: 25px">
+                <img src='${product.image_link}' class='catalog-image' id="${doc.id}" style="position: relative; z-index: 0; border-radius: 25px;  max-height: 200px; width: auto;">
                 </a>
                 </div>
             `
@@ -99,6 +107,7 @@ getCatalog();
 
 <script>
 const setupItemModal = (data, id) => {
+		var modalProductQuery = db.collection('new_test_collection').where("brand", "==", data.brand).limit(6);
 		checkSavedStatus(id);
     brandHeaders(data.brand_id)
     let imageHtml = ''
@@ -106,8 +115,6 @@ const setupItemModal = (data, id) => {
     const imageElement = `
     <div id="product-image">
         <img src="${data.image_link}" style="height: 250px; width: 250px;"/>
-        <div id='saveButtonDiv'>
-        </div>
     </div>
     `
     const descriptionElement = `
@@ -124,8 +131,25 @@ const setupItemModal = (data, id) => {
     purchaseLink.innerHTML = `<div class="product-button-2 d">
     <a href="${data.product_link}" class="link-block-51 _3 w-inline-block"> Buy now from ${data.brand}</a>
     </div>`
-    productName.innerHTML = `${data.name}`
+		productName.innerHTML = `${data.name}`
     itemMaterialIngredients.innerHTML = `${data.ingredients_materials}`
+    itemInstructions.innerHTML = `${data.instructions}`
+    
+     modalProductQuery.get()
+      .then((querySnapshot) => {
+      var data = querySnapshot.docs
+      let modalHtml = ''
+        data.forEach(doc => {
+        	modalProduct = doc.data()
+           const gridElement = `
+            <div class='gridstyleblock'>
+            	<img src='${modalProduct.image_link}' class='catalog-image' id="${doc.id}" style="position: auto; max-height: 200px; max-width: 200px; border-radius: 25px">
+            </div>  
+            `
+          	modalHtml += gridElement
+      })
+      modalBrandItemsGrid.innerHTML = modalHtml
+    })
 }
 
 const brandHeaders = (brand) => {
@@ -150,7 +174,7 @@ const brandHeaders = (brand) => {
 }
 
 const saveItem = (e) => {
-    var docID = e.target.id.substring(10, e.target.id.length)
+    var docID = e.target.id.substring(11, e.target.id.length)
     console.log(docID)
     auth.onAuthStateChanged(user =>  {
         if (user) {
@@ -165,7 +189,7 @@ const saveItem = (e) => {
             console.log(document_ids)
         });
         
-        var item = db.collection("catalog").doc(docID)
+        var item = db.collection("new_test_collection").doc(docID)
         var currentDoc = db.collection('users').doc(user.uid).collection('users_favorites').doc(docID)
         item.get().then(function(doc) {
             if(document_ids.includes(docID)) {
@@ -192,9 +216,9 @@ const checkSavedStatus = (docID) => {
                     userFavoriteList.push(doc.id)
                 })
                 if (userFavoriteList.includes(docID)) {
-                    saveButtonDiv.innerHTML = `<a href="#" id="save-item-${docID}" class="favorite-button">Unsave item</a>`
+                    favoriteButton.innerHTML = `<div class="favoriteactivated" id="saveButton_${docID}" style="display: block;"></div>`
                 } else {
-                    saveButtonDiv.innerHTML = `<a href="#" id="save-item-${docID}" class="favorite-button">Save item</a>`
+                    favoriteButton.innerHTML = `<div class="favoriteinactive" id="saveButton_${docID}" style="display: block;"></div>`
                 }
             }) 
         }
@@ -229,9 +253,57 @@ const checkSavedStatus = (docID) => {
     }
 })
 
-itemImage.addEventListener('click', (e) => {
-  if(e.target.matches(".favorite-button")) {
-    saveItem(e)
+favoriteButton.addEventListener('click', (e) => {
+	saveItem(e)
+})
+
+modalBrandSlide.addEventListener('click', (e) => {
+	if(e.target.matches('.catalog-image')) {
+  	$('.modal').fadeOut();
+    $('.modal-background').fadeOut();
+    itemModal.style.display = "flex";
+    getItemFromCatalog(e.target.id)
+    $(function() {
+            $('.modal').fadeIn();
+            $('.modal-background').fadeIn();
+            e.stopPropagation();
+        });
   }
 })
+</script>
+
+<script>
+const getUserFavorites = () => {
+    auth.onAuthStateChanged(user =>  {
+        if (user) {
+            var userFavorites = db.collection('users').doc(user.uid).collection('users_favorites');
+            userFavorites.get()
+            .then((querySnapshot) => {
+                setupFavorites(querySnapshot.docs)
+            })
+        }
+    })
+}
+
+getUserFavorites();
+
+  const setupFavorites = (data) => {
+    if (data.length) {
+      let html = ''
+      data.forEach(doc => {
+        const product = doc.data();
+        const gridElement = `
+          <div class='gridstyleblock'>
+          	<a href='#' class="modal-trigger" data-target="modal-product">
+          	<img src='${product.image_link}' class='catalog-image' id="${doc.id}" style="border-radius: 25px;">
+            </a>
+          </div>
+					`
+        html += gridElement
+      })
+      usersFavoritesContainer.innerHTML = html
+    } else {
+      usersFavoritesContainer.innerHTML = 'Start favoriting to start your list'
+    }
+  }
 </script>
