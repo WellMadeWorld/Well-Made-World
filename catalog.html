@@ -8,7 +8,7 @@ firebase.auth().onAuthStateChanged((user) => {
  
  <script>
    const getCatalog = () => {
-   		var catalogRef =  db.collection('new_test_collection')
+      var catalogRef =  db.collection('new_catalog')
       var newItemQuery = catalogRef.orderBy("name").limit(8);
       newItemQuery.get()
       .then((querySnapshot) => {
@@ -53,7 +53,7 @@ firebase.auth().onAuthStateChanged((user) => {
  </script>
  
  <script>
- 	const setupQueryItems = (data, category, banner) => {
+    const setupQueryItems = (data, category, banner) => {
     if (data.length) {
         let html = ''
         data.forEach(doc => {
@@ -90,7 +90,7 @@ getCatalog();
 
 <script>
   getItemFromCatalog = (id) => {
-      var docRef = db.collection("new_test_collection").doc(id);
+      var docRef = db.collection("new_catalog").doc(id);
 
       docRef.get().then(function(doc) {
           if (doc.exists) {
@@ -107,8 +107,8 @@ getCatalog();
 
 <script>
 const setupItemModal = (data, id) => {
-		var modalProductQuery = db.collection('new_test_collection').where("brand", "==", data.brand).limit(6);
-		checkSavedStatus(id);
+    var modalProductQuery = db.collection('new_catalog').where("brand", "==", data.brand).limit(6);
+    checkSavedStatus(id);
     brandHeaders(data.brand_id)
     let imageHtml = ''
     let descriptionHtml = ''
@@ -131,7 +131,7 @@ const setupItemModal = (data, id) => {
     purchaseLink.innerHTML = `<div class="product-button-2 d">
     <a href="${data.product_link}" class="link-block-51 _3 w-inline-block"> Buy now from ${data.brand}</a>
     </div>`
-		productName.innerHTML = `${data.name}`
+    productName.innerHTML = `${data.name}`
     itemMaterialIngredients.innerHTML = `${data.ingredients_materials}`
     itemInstructions.innerHTML = `${data.instructions}`
     
@@ -140,13 +140,13 @@ const setupItemModal = (data, id) => {
       var data = querySnapshot.docs
       let modalHtml = ''
         data.forEach(doc => {
-        	modalProduct = doc.data()
+           modalProduct = doc.data()
            const gridElement = `
             <div class='gridstyleblock'>
             	<img src='${modalProduct.image_link}' class='catalog-image' id="${doc.id}" style="position: auto; max-height: 200px; max-width: 200px; border-radius: 25px">
             </div>  
             `
-          	modalHtml += gridElement
+            modalHtml += gridElement
       })
       modalBrandItemsGrid.innerHTML = modalHtml
     })
@@ -158,7 +158,7 @@ const brandHeaders = (brand) => {
     docRef.get().then(function(doc) {
         if (doc.exists) {
             data = doc.data();
-						brandNameOne.innerHTML = `${data.name}`
+	    brandNameOne.innerHTML = `${data.name}`
             brandDescriptionOne.innerHTML = `${data.description}`
             brandImageOne.innerHTML = `<img src="${data.image_link}" style="height: 36px; width: 100px;"/>`
             brandNameTwo.innerHTML = `${data.name}`
@@ -189,7 +189,7 @@ const saveItem = (e) => {
             console.log(document_ids)
         });
         
-        var item = db.collection("new_test_collection").doc(docID)
+        var item = db.collection("new_catalog").doc(docID)
         var currentDoc = db.collection('users').doc(user.uid).collection('users_favorites').doc(docID)
         item.get().then(function(doc) {
             if(document_ids.includes(docID)) {
@@ -229,7 +229,7 @@ const checkSavedStatus = (docID) => {
  <script>
  wholeCatalog.addEventListener('click', (e) => {
     if (e.target.matches('.catalog-image')) {
-    		itemModal.style.display = "flex";
+    	itemModal.style.display = "flex";
         getItemFromCatalog(e.target.id)
         $(function() {
             $('.modal').fadeIn();
