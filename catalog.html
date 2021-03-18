@@ -310,6 +310,7 @@ getUserFavorites();
 
 <script>
  if (window.location.href.substring(65,76) == "?productID=") {
- 	getItemFromCatalog(window.location.href.substring(76,window.location.href.length))
+   itemModal.style.display = "flex";
+   getItemFromCatalog(window.location.href.substring(76,window.location.href.length))
  }
 </script>
