@@ -224,13 +224,10 @@ const checkSavedStatus = (docID) => {
         }
     })
 }
-</script>
 
- <script>
- wholeCatalog.addEventListener('click', (e) => {
-    if (e.target.matches('.catalog-image')) {
-    	itemModal.style.display = "flex";
-        getItemFromCatalog(e.target.id)
+const openModal = (id) => {
+  itemModal.style.display = "flex";
+        getItemFromCatalog(id)
         $(function() {
             $('.modal').fadeIn();
             $('.modal-background').fadeIn();
@@ -250,6 +247,13 @@ const checkSavedStatus = (docID) => {
               $('.modal-background').fadeOut();
             }
       	});
+}
+</script>
+
+<script>
+ wholeCatalog.addEventListener('click', (e) => {
+    if (e.target.matches('.catalog-image')) {
+    	openModal(e.target.id)
     }
 })
 
@@ -310,7 +314,6 @@ getUserFavorites();
 
 <script>
  if (window.location.href.substring(65,76) == "?productID=") {
-   itemModal.style.display = "flex";
-   getItemFromCatalog(window.location.href.substring(76,window.location.href.length))
+   openModal(window.location.href.substring(76,window.location.href.length))
  }
 </script>
