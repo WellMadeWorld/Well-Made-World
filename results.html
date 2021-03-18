@@ -406,36 +406,3 @@ filterGridContainer.addEventListener('click', (e) => {
     }
 })
 </script>
-
-<script>
-if (window.location.href.substring(0,73) == "https://wmwv2-c20fa8e784bbf1172ca5aa4334f549b7.webflow.io/results?search=") {
-  const firstFilters = document.querySelectorAll(".catalog-filter-button-1");
-  firstFilters.forEach(filter => {
-      filter.style.display = "none"; 
-  })
-  firstFilterContainer.innerHTML = `<div class="catalog-filter-button-1 clicked" style="display: inline-block;">${search}</div>`
-}
-
-let searchedItems = []
-
-const commitSearch = () => {
-  var client = algoliasearch('6MV9DYEKML', '7781e10fe7c79ea43fac337934ffaab9');
-  var index = client.initIndex('catalog');
-
-  index.search(search, {
-    hitsPerPage: 20,
-  }).then(({ hits }) => {
-    hits.forEach(hit => {
-      searchedItems.push(hit)
-    })
-    searchResults(hits)
-  });  
-}
-
-commitSearch()
-
-console.log(searchedItems)
-
-searchedItems.forEach(item => console.log(item))
-
-</script>
