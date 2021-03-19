@@ -15,7 +15,7 @@ getItemFromCatalog = (id) => {
 }    
 
 const setupItemModal = (data, id) => {
-		checkSavedStatus(id);
+    checkSavedStatus(id);
     brandHeaders(data.brand_id)
     let imageHtml = ''
     let descriptionHtml = ''
@@ -23,7 +23,6 @@ const setupItemModal = (data, id) => {
     <div id="product-image">
         <img src="${data.image_link}" style="height: 250px; width: 250px;"/>
         <p> Price: $${data.price} </p>
-        <a href="${data.product_link}">Link to buy</a>
          <div id='saveButtonDiv'>
         </div>
     </div>
