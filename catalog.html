@@ -128,9 +128,6 @@ const setupItemModal = (data, id) => {
     itemImage.innerHTML = imageHtml
     itemDescription.innerHTML = descriptionHtml
     productPrice.innerHTML = `$${data.price}`
-    purchaseLink.innerHTML = `<div class="product-button-2 d">
-    <a href="${data.product_link}" class="link-block-51 _3 w-inline-block"> Buy now from ${data.brand}</a>
-    </div>`
     productName.innerHTML = `${data.name}`
     itemMaterialIngredients.innerHTML = `${data.ingredients_materials}`
     itemInstructions.innerHTML = `${data.instructions}`
