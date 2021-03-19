@@ -135,6 +135,16 @@ const setupItemModal = (data, id) => {
     itemMaterialIngredients.innerHTML = `${data.ingredients_materials}`
     itemInstructions.innerHTML = `${data.instructions}`
     
+    let alternateImages = ''
+    
+    allImages.forEach(image => {
+      if (image == '') {
+	console.log('no image')      
+      } else {
+	console.log('image')      
+      }
+    })
+    
      modalProductQuery.get()
       .then((querySnapshot) => {
       var data = querySnapshot.docs
@@ -143,7 +153,7 @@ const setupItemModal = (data, id) => {
            modalProduct = doc.data()
            const gridElement = `
             <div class='gridstyleblock'>
-            	<img src='${modalProduct.image_link}' class='catalog-image' id="${doc.id}" style="position: auto; max-height: 200px; max-width: 200px; border-radius: 25px">
+            	<img src='${modalProduct.image_link}' class='catalog-image' id="${doc.id}" style="position: auto; width: auto; border-radius: 25px">
             </div>  
             `
             modalHtml += gridElement
