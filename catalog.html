@@ -107,6 +107,9 @@ getCatalog();
 
 <script>
 const setupItemModal = (data, id) => {
+    let allImages = []
+    allImages.push(data.image_link, data.image2, data.image3, data.image4)
+    console.log(allImages)
     var modalProductQuery = db.collection('new_catalog').where("brand", "==", data.brand).limit(6);
     checkSavedStatus(id);
     brandHeaders(data.brand_id)
