@@ -109,7 +109,6 @@ getCatalog();
 const setupItemModal = (data, id) => {
     let allImages = []
     allImages.push(data.image_link, data.image2, data.image3, data.image4)
-    console.log(allImages)
     var modalProductQuery = db.collection('new_catalog').where("brand", "==", data.brand).limit(6);
     checkSavedStatus(id);
     brandHeaders(data.brand_id)
@@ -138,12 +137,17 @@ const setupItemModal = (data, id) => {
     let alternateImages = ''
     
     allImages.forEach(image => {
-      if (image == '') {
-	console.log('no image')      
+      if (image == '') {      
       } else {
-	console.log('image')      
+	const alternateImage = `
+	  <div class='tumbnailimageblock'>
+	    <img src='${image}' class='thumbnail-image' style='border-radius: 25px;'
+	  </div>
+	`
+	alternateImages += alternateImage
       }
     })
+    modalThumbnailImages.innerHTML = alternateImages
     
      modalProductQuery.get()
       .then((querySnapshot) => {
