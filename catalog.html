@@ -140,9 +140,9 @@ const setupItemModal = (data, id) => {
       if (image == '') {      
       } else {
 	const alternateImage = `
-	  <div class='tumbnailimageblock'>
+	  <div class='ThumbNailImageBlock'>
 	    <a>
-	      <img src='${image}' class='thumbnail-image' style='border-radius: 25px;'
+	      <img src='${image}' class='thumbnail-image' id='${id}' style='border-radius: 25px;'/>
 	    </a>
 	  </div>
 	`
@@ -278,16 +278,22 @@ favoriteButton.addEventListener('click', (e) => {
 })
 
 modalBrandSlide.addEventListener('click', (e) => {
-	if(e.target.matches('.catalog-image')) {
-  	$('.modal').fadeOut();
+  if(e.target.matches('.catalog-image')) {
+    $('.modal').fadeOut();
     $('.modal-background').fadeOut();
     itemModal.style.display = "flex";
     getItemFromCatalog(e.target.id)
     $(function() {
-            $('.modal').fadeIn();
-            $('.modal-background').fadeIn();
-            e.stopPropagation();
-        });
+       $('.modal').fadeIn();
+       $('.modal-background').fadeIn();
+       e.stopPropagation();
+    });
+  }
+})
+
+modalThumbnailImages.addEventListener('click', (e) => {
+  if(e.target.matches('.ThumbNailImageBlock')) {
+    console.log(e.target.id)
   }
 })
 </script>
