@@ -141,7 +141,9 @@ const setupItemModal = (data, id) => {
       } else {
 	const alternateImage = `
 	  <div class='ThumbNailImageBlock'>
-	    <img src='${image}' class='thumbnail-image' id='${id}' style='border-radius: 25px;'/>
+	    <a href='#'>
+	      <img src='${image}' class='thumbnail-image' id='${id}' style='border-radius: 25px;'/>
+  	    </a>
 	  </div>
 	`
 	alternateImages += alternateImage
@@ -290,7 +292,7 @@ modalBrandSlide.addEventListener('click', (e) => {
 })
 
 modalThumbnailImages.addEventListener('click', (e) => {
-  if(e.target.matches('.ThumbNailImageBlock')) {
+  if(e.target.matches('.thumbnail-image')) {
     console.log(e.target.id)
   }
 })
