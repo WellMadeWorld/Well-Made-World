@@ -361,6 +361,9 @@ secondFilterContainer.addEventListener('click', (e) => {
     compoundQueryOne(e.target.id.substring(0,e.target.id.length - 12))
     thirdFilterContainer.style.display = "block";
   }
+  if (e.target.matches(".catalog-filter-button-2")) {
+    filterSearch(e.target.value)
+  }
 })
 	
 thirdFilterContainer.addEventListener('click', (e) => {
