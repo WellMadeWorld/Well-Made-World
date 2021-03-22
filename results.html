@@ -349,7 +349,11 @@ firstFilterContainer.addEventListener('click', (e) => {
 
 secondFilterContainer.addEventListener('click', (e) => {
   var secondFilters = document.querySelectorAll('.catalog-filter-button-2')
+  var secondSearchFilters = document.querySelectorAll('.catalog-search-button-2')
   secondFilters.forEach(button => {
+    button.classList.remove('clicked')
+  })
+  secondSearchFilters.forEach(button => {
     button.classList.remove('clicked')
   })
   e.target.classList.add("clicked");
