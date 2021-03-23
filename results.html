@@ -350,37 +350,39 @@ firstFilterContainer.addEventListener('click', (e) => {
 secondFilterContainer.addEventListener('click', (e) => {
   var secondFilters = document.querySelectorAll('.catalog-filter-button-2')
   var secondSearchFilters = document.querySelectorAll('.catalog-search-button-2')
-  secondFilters.forEach(button => {
-    button.classList.remove('clicked')
-  })
-  secondSearchFilters.forEach(button => {
-    button.classList.remove('clicked')
-  })
-  e.target.classList.add("clicked");
   if (e.target.matches(".catalog-filter-button-2")) {
+    secondFilters.forEach(button => {
+      button.classList.remove('clicked')
+    })
+    e.target.classList.add("clicked");
     compoundQueryOne(e.target.id.substring(0,e.target.id.length - 12))
     thirdFilterContainer.style.display = "block";
   }
   if (e.target.matches(".catalog-search-button-2")) {
     filterSearch(e.target.id.substring(0, e.target.id.length - 12))
+    secondSearchFilters.forEach(button => {
+      button.classList.remove('clicked')
+    })
+    e.target.classList.add('clicked')
   }
 })
 	
 thirdFilterContainer.addEventListener('click', (e) => {
   var thirdFilters = document.querySelectorAll('.catalog-filter-button-3')
   var thirdSearchFilters = document.querySelectorAll('.catalog-search-button-3')
-  thirdFilters.forEach(button => {
-    button.classList.remove('clicked')
-  })
-  thirdSearchFilters.forEach(button => {
-    button.classList.remove('clicked')
-  })
-  e.target.classList.add("clicked")
   if (e.target.matches(".catalog-filter-button-3")) {
+    thirdFilters.forEach(button => {
+      button.classList.remove('clicked')
+    })
     compoundQueryTwo(e.target.id.substring(0,e.target.id.length - 12))
+    e.target.classList.add("clicked")
   }
   if (e.target.matches(".catalog-search-button-3")) {
+    thirdSearchFilters.forEach(button => {
+      button.classList.remove('clicked')
+    })
     finalFilter(e.target.id.substring(0, e.target.id.length - 12))
+    e.target.classList.add("clicked")
   }
 })
 	
