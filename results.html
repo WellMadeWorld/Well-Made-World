@@ -1,6 +1,6 @@
 <script>
 getItemFromCatalog = (id) => {
-    var docRef = db.collection("test_collection").doc(id);
+    var docRef = db.collection("new_catalog").doc(id);
 
     docRef.get().then(function(doc) {
         if (doc.exists) {
@@ -15,6 +15,9 @@ getItemFromCatalog = (id) => {
 }    
 
 const setupItemModal = (data, id) => {
+    let allImages = []
+    allImages.push(data.image_link, data.image2, data.image3, data.image4)
+    var modalProductQuery = db.collection('new_catalog').where("brand", "==", data.brand).limit(6);
     checkSavedStatus(id);
     brandHeaders(data.brand_id)
     let imageHtml = ''
@@ -22,9 +25,6 @@ const setupItemModal = (data, id) => {
     const imageElement = `
     <div id="product-image">
         <img src="${data.image_link}" style="height: 250px; width: 250px;"/>
-        <p> Price: $${data.price} </p>
-         <div id='saveButtonDiv'>
-        </div>
     </div>
     `
     const descriptionElement = `
@@ -35,9 +35,66 @@ const setupItemModal = (data, id) => {
     
     imageHtml += imageElement
     descriptionHtml += descriptionElement
-
     itemImage.innerHTML = imageHtml
     itemDescription.innerHTML = descriptionHtml
+    productPrice.innerHTML = `$${data.price}`
+    productName.innerHTML = `${data.name}`
+    itemMaterialIngredients.innerHTML = `${data.ingredients_materials}`
+    itemInstructions.innerHTML = `${data.instructions}`
+    
+    let alternateImages = ''
+    
+    allImages.forEach(image => {
+      if (image == '') {      
+      } else {
+	const alternateImage = `
+	  <div class='ThumbNailImageBlock'>
+	    <a href='#'>
+	      <img src='${image}' class='thumbnail-image' id='${id}' style='border-radius: 25px;'/>
+  	    </a>
+	  </div>
+	`
+	alternateImages += alternateImage
+      }
+    })
+    modalThumbnailImages.innerHTML = alternateImages
+    
+     modalProductQuery.get()
+      .then((querySnapshot) => {
+      var data = querySnapshot.docs
+      let modalHtml = ''
+        data.forEach(doc => {
+           modalProduct = doc.data()
+           const gridElement = `
+            <div class='gridstyleblock'>
+            	<img src='${modalProduct.image_link}' class='catalog-image' id="${doc.id}" style="position: auto; width: auto; border-radius: 25px">
+            </div>  
+            `
+            modalHtml += gridElement
+      })
+      modalBrandItemsGrid.innerHTML = modalHtml
+    })
+}
+
+const brandHeaders = (brand) => {
+    var docRef = db.collection('brands').doc(brand)
+
+    docRef.get().then(function(doc) {
+        if (doc.exists) {
+            data = doc.data();
+	    brandNameOne.innerHTML = `${data.name}`
+            brandDescriptionOne.innerHTML = `${data.description}`
+            brandImageOne.innerHTML = `<img src="${data.image_link}" style="height: 36px; width: 100px;"/>`
+            brandNameTwo.innerHTML = `${data.name}`
+            brandDescriptionTwo.innerHTML = `${data.description}`
+            brandImageTwo.innerHTML = `<img src="${data.image_link}" style="height: 36px; width: 100px;"/>`
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
 }
 
 const brandHeaders = (brand) => {
