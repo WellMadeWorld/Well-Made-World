@@ -297,12 +297,7 @@ itemModal.addEventListener('click', (e) => {
     $('.modal').fadeOut();
     $('.modal-background').fadeOut();
     itemModal.style.display = "flex";
-    getItemFromCatalog(e.target.id)
-    $(function() {
-       $('.modal').fadeIn();
-       $('.modal-background').fadeIn();
-       e.stopPropagation();
-    });
+    openModal(e.target.id)
   }
 })
 
