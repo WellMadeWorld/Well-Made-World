@@ -206,7 +206,6 @@ const brandHeaders = (brand) => {
 
 const saveItem = (e) => {
     var docID = e.target.id.substring(11, e.target.id.length)
-    console.log(docID)
     auth.onAuthStateChanged(user =>  {
         if (user) {
         
@@ -217,7 +216,6 @@ const saveItem = (e) => {
             querySnapshot.forEach(function(doc) {
                 document_ids.push(doc.id);
             });
-            console.log(document_ids)
         });
         
         var item = db.collection("new_catalog").doc(docID)
@@ -258,6 +256,7 @@ const checkSavedStatus = (docID) => {
 
 const openModal = (id) => {
   itemModal.style.display = "flex";
+  itemModal.scrollTo(0,0);
         getItemFromCatalog(id)
         $(function() {
             $('.modal').fadeIn();
