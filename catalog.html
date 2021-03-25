@@ -33,7 +33,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var shoesItemQuery = catalogRef.where("item_category", "==", "Shoes").limit(8);
+      var shoesItemQuery = catalogRef.where("item_category", "==", "Footware").limit(8);
       shoesItemQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "shoesItemGrid")
