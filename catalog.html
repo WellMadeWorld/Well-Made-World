@@ -60,11 +60,13 @@ firebase.auth().onAuthStateChanged((user) => {
             const product = doc.data();
             if (banner === undefined) {
             const gridElement = `
+	    <div class="ecommercewrapper">
             <div class='gridstyleblock'>
                 <a href='#' class="modal-trigger" data-target="modal-product">
                 <img src='${product.image_link}' class='catalog-image' id="${doc.id}" style="position: auto; width: auto; border-radius: 25px;">
                 </a>
                 </div>
+	    </div>
             `
             html += gridElement
             } else {
