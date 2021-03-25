@@ -62,10 +62,12 @@ firebase.auth().onAuthStateChanged((user) => {
             const gridElement = `
 	    <div class="ecommercewrapper">
             <div class='gridstyleblock'>
+		/*
                 <a href='#' class="modal-trigger" data-target="modal-product">
                 <img src='${product.image_link}' class='catalog-image' id="${doc.id}" style="position: auto; width: auto; border-radius: 25px;">
                 </a>
-                </div>
+		*/
+             </div>
 		<div class="name-price" style="display: block; opacity: 0; width: 200px; height: 0px;">
 		  <div class="productname">name</div>
 		  <div class="productprice">$</div>
