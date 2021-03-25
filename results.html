@@ -394,7 +394,6 @@ secondFilterContainer.addEventListener('click', (e) => {
     thirdFilterContainer.style.display = "block";
   }
   if (e.target.matches(".catalog-search-button-2")) {
-	  console.log('pressed')
     filterSearch(e.target.id.substring(0, e.target.id.length - 12))
     secondSearchFilters.forEach(button => {
       button.classList.remove('clicked')
