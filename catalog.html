@@ -66,6 +66,10 @@ firebase.auth().onAuthStateChanged((user) => {
                 <img src='${product.image_link}' class='catalog-image' id="${doc.id}" style="position: auto; width: auto; border-radius: 25px;">
                 </a>
                 </div>
+		<div class="name-price" style="display: block; opacity: 0; width: 200px; height: 0px;">
+		  <div class="productname">name</div>
+		  <div class="productprice">$</div>
+		</div>
 	    </div>
             `
             html += gridElement
