@@ -105,6 +105,14 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
+      var refillableItemsQuery = catalogRef.where("filter_tags.Refillable", "==", true).limit(8);
+      refillableItemsQuery.get()
+      .then((querySnapshot) => {
+          setupQueryItems(querySnapshot.docs, "refillableItemsGrid")
+      })
+      .catch((error) => {
+          console.log("Error getting documents: ", error);
+      });
       var crueltyFreeItemsQuery = catalogRef.where("filter_tags.cruelty_free", "==", true).limit(8);
      crueltyFreeItemsQuery.get()
       .then((querySnapshot) => {
