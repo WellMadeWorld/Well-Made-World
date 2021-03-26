@@ -352,9 +352,9 @@ const checkSavedStatus = (docID) => {
                     userFavoriteList.push(doc.id)
                 })
                 if (userFavoriteList.includes(docID)) {
-                    saveButtonDiv.innerHTML = `<a href="#" id="save-item-${docID}" class="favorite-button">Unsave item</a>`
+                    favoriteButton.innerHTML = `<div class="favoriteactivated" id="saveButton_${docID}" style="display: block;"></div>`
                 } else {
-                    saveButtonDiv.innerHTML = `<a href="#" id="save-item-${docID}" class="favorite-button">Save item</a>`
+                    favoriteButton.innerHTML = `<div class="favoriteinactive" id="saveButton_${docID}" style="display: block;"></div>`
                 }
             }) 
         }
