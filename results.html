@@ -20,6 +20,7 @@ const setupItemModal = (data, id) => {
     var modalProductQuery = db.collection('new_catalog').where("brand", "==", data.brand).limit(6);
     checkSavedStatus(id);
     setupTabs(data, id)
+    setupVideos(data, id)
     brandHeaders(data.brand_id);
     let imageHtml = '';
     let descriptionHtml = '';
