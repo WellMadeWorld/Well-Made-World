@@ -225,7 +225,7 @@ const setupItemModal = (data, id) => {
     productName.innerHTML = `${data.name}`
     itemMaterialIngredients.innerHTML = `${data.ingredients_materials}`
     itemInstructions.innerHTML = `${data.instructions}`
-    productSiteLink.setAttribute('href', '${data.product_link}')
+    productSiteLink.setAttribute('href', `${data.product_link}`)
     
     let alternateImages = ''
     
