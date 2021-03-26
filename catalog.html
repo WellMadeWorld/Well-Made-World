@@ -331,11 +331,9 @@ const checkSavedStatus = (docID) => {
 		console.log(docID)
 		console.log(userFavoriteList)
                 if (userFavoriteList.includes(docID)) {
-                    favoriteActivated.style.display = "block";
-		    favoriteInactive.style.display = "none"
+                    favoriteButton.innerHTML = `<div class="favoriteactivated" id="saveButton_${docID}" style="display: block;"></div>`
                 } else {
-                    favoriteInactive.style.display = "block"
-		    favoriteActivated.style.display = "none";
+                    favoriteButton.innerHTML = `<div class="favoriteinactive" id="saveButton_${docID}" style="display: block;"></div>`
                 }
             }) 
         }
