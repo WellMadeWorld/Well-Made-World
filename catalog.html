@@ -327,6 +327,7 @@ const checkSavedStatus = (docID) => {
                 snapShot.docs.forEach(doc => {
                     userFavoriteList.push(doc.id)
                 })
+		console.log(docID)
                 if (userFavoriteList.includes(docID)) {
                     favoriteButton.innerHTML = `<div class="favoriteactivated" id="saveButton_${docID}" style="display: block;"></div>`
                 } else {
