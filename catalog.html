@@ -50,7 +50,7 @@ firebase.auth().onAuthStateChanged((user) => {
           console.log("Error getting documents: ", error);
       });
       var madeInUSAQuery = catalogRef.where("filter_tags.MadeInUSA", "==", true).limit(8);
-      madeInUSAQueryQuery.get()
+      madeInUSAQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "madeInUSAGrid")
       })
@@ -58,7 +58,7 @@ firebase.auth().onAuthStateChanged((user) => {
           console.log("Error getting documents: ", error);
       });
       var madeInCanadaQuery = catalogRef.where("filter_tags.Made_in_Canada", "==", true).limit(8);
-      madeInCanadaQueryQuery.get()
+      madeInCanadaQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "madeInCanadaGrid")
       })
@@ -69,6 +69,14 @@ firebase.auth().onAuthStateChanged((user) => {
       womenOwnedBusinessQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "womenOwnedBusinessGrid")
+      })
+      .catch((error) => {
+          console.log("Error getting documents: ", error);
+      });
+      var productsThatGiveQuery = catalogRef.where("brand_id", "==", 'HMSJbKhExwwmVhHdNlJa').limit(8);
+      productsThatGiveQuery.get()
+      .then((querySnapshot) => {
+          setupQueryItems(querySnapshot.docs, "productsThatGiveGrid")
       })
       .catch((error) => {
           console.log("Error getting documents: ", error);
