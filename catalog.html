@@ -310,6 +310,7 @@ const saveItem = (e) => {
                 currentDoc.set(doc.data())
             }
             checkSavedStatus(docID)
+	    getUserFavorites()
         })
 
         } else {
@@ -409,25 +410,25 @@ const getUserFavorites = () => {
 
 getUserFavorites();
 
-  const setupFavorites = (data) => {
-    if (data.length) {
-      let html = ''
-      data.forEach(doc => {
-        const product = doc.data();
-        const gridElement = `
-          <div class='gridstyleblock'>
-          	<a href='#' class="modal-trigger" data-target="modal-product">
-          	<img src='${product.image_link}' class='catalog-image' id="${doc.id}" style="border-radius: 25px;">
-            </a>
-          </div>
-					`
-        html += gridElement
-      })
-      favoriteItemsGrid.innerHTML = html
-    } else {
-      favoriteItemsGrid.innerHTML = 'Start favoriting to start your list'
-    }
+const setupFavorites = (data) => {
+  if (data.length) {
+  let html = ''
+  data.forEach(doc => {
+    const product = doc.data();
+      const gridElement = `
+        <div class='gridstyleblock'>
+	  <a href='#' class="modal-trigger" data-target="modal-product">
+	  <img src='${product.image_link}' class='catalog-image' id="${doc.id}" style="border-radius: 25px;">
+          </a>
+        </div>
+  `
+  html += gridElement
+  })
+  favoriteItemsGrid.innerHTML = html
+  } else {
+    favoriteItemsGrid.innerHTML = 'Start favoriting to start your list'
   }
+}
 </script>
 
 <script>
