@@ -81,6 +81,46 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
+      var recyclableItemsQuery = catalogRef.where("filter_tags.Recyclable", "==", true).limit(8);
+      recyclableItemsQuery.get()
+      .then((querySnapshot) => {
+          setupQueryItems(querySnapshot.docs, "recyclableItemsGrid")
+      })
+      .catch((error) => {
+          console.log("Error getting documents: ", error);
+      });
+      var plasticFreeItemsQuery = catalogRef.where("filter_tags.Plastic_Free", "==", true).limit(8);
+      plasticFreeItemsQuery.get()
+      .then((querySnapshot) => {
+          setupQueryItems(querySnapshot.docs, "plasticFreeItemsGrid")
+      })
+      .catch((error) => {
+          console.log("Error getting documents: ", error);
+      });
+      var biodegradableItemsQuery = catalogRef.where("filter_tags.biodegradable", "==", true).limit(8);
+      biodegradableItemsQuery.get()
+      .then((querySnapshot) => {
+          setupQueryItems(querySnapshot.docs, "biodegradableItemsGrid")
+      })
+      .catch((error) => {
+          console.log("Error getting documents: ", error);
+      });
+      var crueltyFreeItemsQuery = catalogRef.where("filter_tags.cruelty_free", "==", true).limit(8);
+     crueltyFreeItemsQuery.get()
+      .then((querySnapshot) => {
+          setupQueryItems(querySnapshot.docs, "crueltyFreeItemsGrid")
+      })
+      .catch((error) => {
+          console.log("Error getting documents: ", error);
+      });
+      var veganItemsQuery = catalogRef.where("filter_tags.vegan", "==", true).limit(8);
+     veganItemsQuery.get()
+      .then((querySnapshot) => {
+          setupQueryItems(querySnapshot.docs, "veganItemsGrid")
+      })
+      .catch((error) => {
+          console.log("Error getting documents: ", error);
+      });
  	}
  </script>
  
