@@ -15,13 +15,13 @@ getItemFromCatalog = (id) => {
 }    
 
 const setupItemModal = (data, id) => {
-    let allImages = []
-    allImages.push(data.image_link, data.image2, data.image3, data.image4)
+    let allImages = [];
+    allImages.push(data.image_link, data.image2, data.image3, data.image4);
     var modalProductQuery = db.collection('new_catalog').where("brand", "==", data.brand).limit(6);
     checkSavedStatus(id);
-    brandHeaders(data.brand_id)
-    let imageHtml = ''
-    let descriptionHtml = ''
+    brandHeaders(data.brand_id);
+    let imageHtml = '';
+    let descriptionHtml = '';
     const imageElement = `
     <div id="product-image">
         <img src="${data.image_link}" style="height: 250px; width: 250px;"/>
@@ -41,6 +41,7 @@ const setupItemModal = (data, id) => {
     productName.innerHTML = `${data.name}`
     itemMaterialIngredients.innerHTML = `${data.ingredients_materials}`
     itemInstructions.innerHTML = `${data.instructions}`
+    productSiteLink.setAttribute('href', `${data.product_link}`)
     
     let alternateImages = ''
     
