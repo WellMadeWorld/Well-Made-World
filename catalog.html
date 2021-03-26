@@ -49,6 +49,30 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
+      var madeInUSAQuery = catalogRef.where("filter_tags.MadeInUSA", "==", true).limit(8);
+      madeInUSAQueryQuery.get()
+      .then((querySnapshot) => {
+          setupQueryItems(querySnapshot.docs, "madeInUSAGrid")
+      })
+      .catch((error) => {
+          console.log("Error getting documents: ", error);
+      });
+      var madeInCanadaQuery = catalogRef.where("filter_tags.Made_in_Canada", "==", true).limit(8);
+      madeInCanadaQueryQuery.get()
+      .then((querySnapshot) => {
+          setupQueryItems(querySnapshot.docs, "madeInCanadaGrid")
+      })
+      .catch((error) => {
+          console.log("Error getting documents: ", error);
+      });
+      var womenOwnedBusinessQuery = catalogRef.where("filter_tags.Women_Owned_Business", "==", true).limit(8);
+      womenOwnedBusinessQuery.get()
+      .then((querySnapshot) => {
+          setupQueryItems(querySnapshot.docs, "womenOwnedBusinessGrid")
+      })
+      .catch((error) => {
+          console.log("Error getting documents: ", error);
+      });
  	}
  </script>
  
