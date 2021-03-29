@@ -9,7 +9,7 @@ firebase.auth().onAuthStateChanged((user) => {
  <script>
    const getCatalog = () => {
       var catalogRef =  db.collection('new_catalog')
-      var newItemQuery = catalogRef.orderBy("name").limit(8);
+      var newItemQuery = catalogRef.orderBy("name").limit(12);
       newItemQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "newItemsGrid", "https://assets.website-files.com/6011846d13792869a7112a47/6011846d1379286222112cb5_Group%202248.png")
@@ -17,7 +17,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var trendingItemQuery = catalogRef.orderBy("item_category", "desc").limit(8);
+      var trendingItemQuery = catalogRef.orderBy("item_category", "desc").limit(12);
       trendingItemQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "trendingItemsGrid", "https://assets.website-files.com/6011846d13792869a7112a47/601d98f09e99733b131e10f1_nnn.svg")
@@ -25,7 +25,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var baggageItemQuery = catalogRef.where("item_category", "==", "Bags").limit(8);
+      var baggageItemQuery = catalogRef.where("item_category", "==", "Bags").limit(12);
       baggageItemQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "baggageItemsGrid")
@@ -33,7 +33,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var shoesItemQuery = catalogRef.where("item_category", "==", "Footware").limit(8);
+      var shoesItemQuery = catalogRef.where("item_category", "==", "Footware").limit(12);
       shoesItemQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "shoesItemGrid")
