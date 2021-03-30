@@ -91,6 +91,9 @@ const brandHeaders = (brand) => {
             brandNameTwo.innerHTML = `${data.name}`
             brandDescriptionTwo.innerHTML = `${data.description}`
             brandImageTwo.innerHTML = `<img src="${data.image_link}" style="height: 36px; width: 100px;"/>`
+	    brandCause.innerHTML = `${data.the_cause}`
+	    brandPeople.innerHTML = `${data.the_people}`
+	    brandProducts.innerHTML = `${data.the_products}`
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
