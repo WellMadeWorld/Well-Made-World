@@ -393,6 +393,12 @@ modalThumbnailImages.addEventListener('click', (e) => {
     changeThumbnailImage(e.target.getAttribute('src'))
   }
 })
+	
+modalThumbnailImages.addEventListener('click', (e) => {
+  if(e.target.matches('.catalog-image')) {
+    openModal(e.target.id)
+  }
+})
 </script>
 
 <script>
