@@ -81,10 +81,18 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var recyclableItemsQuery = catalogRef.where("filter_tags.Recyclable", "==", true).limit(8);
-      recyclableItemsQuery.get()
+      var recycledPlasticQuery = catalogRef.where("filter_tags.recycled_plastic", "==", true).limit(8);
+      recycledPlasticQuery.get()
       .then((querySnapshot) => {
-          setupQueryItems(querySnapshot.docs, "recyclableItemsGrid")
+          setupQueryItems(querySnapshot.docs, "recycledPlasticGrid")
+      })
+      .catch((error) => {
+          console.log("Error getting documents: ", error);
+      });
+      var recycledCottonQuery = catalogRef.where("filter_tags.recycled_cotton", "==", true).limit(8);
+      recycledCottonQuery.get()
+      .then((querySnapshot) => {
+          setupQueryItems(querySnapshot.docs, "recycledCottonGrid")
       })
       .catch((error) => {
           console.log("Error getting documents: ", error);
