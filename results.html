@@ -437,6 +437,12 @@ entirePage.addEventListener('click', (e) => {
     getLastItems();
   }
 })
+	
+modalThumbnailImages.addEventListener('click', (e) => {
+  if(e.target.matches('.thumbnail-image')) {
+    changeThumbnailImage(e.target.getAttribute('src'))
+  }
+})
 
 filterGridContainer.addEventListener('click', (e) => {
     if (e.target.matches('.catalog-image')) {
