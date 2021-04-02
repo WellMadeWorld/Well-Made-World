@@ -93,9 +93,13 @@ const brandHeaders = (brand) => {
 	    brandCause.innerHTML = `${data.the_cause}`
 	    brandPeople.innerHTML = `${data.the_people}`
 	    brandProducts.innerHTML = `${data.the_products}`
-	    modalVideoContainer.innerHTML = `<iframe width="420" height="345" src="https://www.youtube.com/embed/${data.media_1}">
-</iframe><iframe width="420" height="345" src="https://www.youtube.com/embed/${data.media_2}">
-</iframe>`
+	    if (data.media_1 == "") {
+		    modalVideoContainer.innerHTML = ''
+	    } else {
+		    modalVideoContainer.innerHTML = `<iframe width="420" height="345" src="https://www.youtube.com/embed/${data.media_1}">
+	      </iframe><iframe width="420" height="345" src="https://www.youtube.com/embed/${data.media_2}">
+              </iframe>`
+	    }
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
