@@ -441,6 +441,8 @@ const setupRecommendations = () => {
     let totalPoints = 0
     for (const [key, value] of Object.entries(categoryClicks)) {
         totalPoints += value
+    }
+    for (const [key, value] of Object.entries(categoryClicks)) {
         let obj = {}
         obj[key] = Math.floor((value/totalPoints) * 10)
         queries.push(obj);
