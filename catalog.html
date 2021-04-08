@@ -454,11 +454,17 @@ const setupRecommendations = () => {
             querySnapshot.docs.forEach(doc => {
                 product = doc.data()
                 const gridElement = `
-            <div class='catalog-item'>
-                <a href='#' class="modal-trigger" data-target="modal-product">
-                <img src='${product.image_link}' class='catalog-image' id="${doc.id}">
+	    <div class="ecommercewrapper">
+            <div class="gridstyleblock">
+                <a href='#'>
+                  <img src='${product.image_link}' class='catalog-image' id="${doc.id}" style="position: auto; width: auto; border-radius: 25px;">
                 </a>
-            </div>
+             </div>
+		<div class="name-price" style="display: block; opacity: 0; width: 200px; height: 0px;">
+		  <div class="productname">${product.name}</div>
+		  <div class="productprice">$${product.price}</div>
+		</div>
+	    </div>
             `
             html += gridElement
             })
