@@ -404,6 +404,8 @@ let categoryClicks = {}
 function getRecommendations() { 
     auth.onAuthStateChanged(user =>  {
         if (user) {
+	    recommendedHeader.style.display = "block";
+	    recommendedGrid.style.display = "flex";
             var docRef = db.collection('users').doc(user.uid).collection('users_item_clicks')
             var topItems = docRef.orderBy("clicks", "desc").limit(6);
             topItems.get()
@@ -425,7 +427,10 @@ function getRecommendations() {
             }).catch(function(error) {
                 console.log("Error getting document:", error);
             });
-        }  
+        } else {
+	  recommendedHeader.style.display = "none";
+	  recommendedGrid.style.display = "none";	
+	}
     }) 
 }
 	
