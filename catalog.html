@@ -368,7 +368,27 @@ const updateClicks = (item) => {
                 let newClicks = product.clicks += 1;
                 docRef.update({clicks: newClicks})
             }
-            console.log(product.clicks)
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    var usersItemClicks = db.collection('users').doc(user.uid).collection('users_item_clicks').doc(item)
+                    usersItemClicks.get()
+                    .then(function(doc) {
+                        if (doc.exists) {
+                            let info = doc.data()
+                            let clicks = info.clicks
+                            usersItemClicks.update({clicks: clicks += 1})
+                        } else {
+                            usersItemClicks.set({
+                                clicks: 1,
+                                brand: product.brand,
+                                brand_id: product.brand_id,
+                                item_category: product.item_category
+                            })
+                        }
+                        
+                    })
+                }
+              });
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
@@ -376,6 +396,72 @@ const updateClicks = (item) => {
     }).catch((error) => {
         console.log("Error getting document:", error);
     });
+}
+
+let brandClicks = {}
+let categoryClicks = {}
+
+function getRecommendations() { 
+    auth.onAuthStateChanged(user =>  {
+        if (user) {
+            var docRef = db.collection('users').doc(user.uid).collection('users_item_clicks')
+            var topItems = docRef.orderBy("clicks", "desc").limit(6);
+            topItems.get()
+            .then((querySnapshot) => {
+                querySnapshot.docs.forEach(doc => {
+                    let data = doc.data()
+                    if (!(data.brand in brandClicks)) {
+                        brandClicks[data.brand] = data.clicks;
+                    } else {
+                        brandClicks[data.brand] = brandClicks[data.brand] += data.clicks 
+                    }
+                    if(!(data.item_category in categoryClicks)) {
+                        categoryClicks[data.item_category] = data.clicks;
+                    } else {
+                        categoryClicks[data.item_category] = categoryClicks[data.item_category] += data.clicks 
+                    }
+                })
+                setupRecommendations()
+            }).catch(function(error) {
+                console.log("Error getting document:", error);
+            });
+        }  
+    }) 
+}
+	
+getRecommendations();
+
+const setupRecommendations = () => {
+    let queries = []
+    let totalPoints = 0
+    for (const [key, value] of Object.entries(categoryClicks)) {
+        totalPoints += value
+        let obj = {}
+        obj[key] = Math.floor((value/totalPoints) * 10)
+        queries.push(obj);
+    }
+    let html = '';
+    var docRef = db.collection('new_catalog')
+    queries.forEach(obj => {
+        let query = docRef.where('item_category', '==', Object.keys(obj)[0]).limit(Object.values(obj)[0])
+        query.get()
+        .then((querySnapshot) => {
+            querySnapshot.docs.forEach(doc => {
+                product = doc.data()
+                const gridElement = `
+            <div class='catalog-item'>
+                <a href='#' class="modal-trigger" data-target="modal-product">
+                <img src='${product.image_link}' class='catalog-image' id="${doc.id}">
+                </a>
+            </div>
+            `
+            html += gridElement
+            })
+            recommendedGrid.innerHTML = html;
+        }).catch(function(error) {
+            console.log("Error getting document:", error);
+        });
+    })
 }
 
 const openModal = (id) => {
