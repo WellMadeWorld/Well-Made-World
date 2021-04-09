@@ -186,6 +186,38 @@ firebase.auth().onAuthStateChanged((user) => {
 }
 
 getCatalog();
+
+const getRandom = () => {
+    let randomNums = []
+    let html = ''
+    while (randomNums.length < 3) {
+        let randomNum = Math.floor(Math.random() * 19);
+        if(!(randomNums.includes(randomNum))) {
+            randomNums.push(randomNum)
+        }
+    }
+    randomNums.forEach(num => {
+        var productsRef = db.collection('products')
+        var randomNumQuery = productsRef.where("product_num", "==", num);
+        randomNumQuery.get()
+        .then(function(querySnapshot) {
+            querySnapshot.docs.forEach(doc => {
+                let data = doc.data();
+                let gridElement = `
+                <div class='catalog-item'>
+                    <a href='#' class="modal-trigger" data-target="modal-product">
+                    <img src='${data.image_link}' class='catalog-image' id="${doc.id}">
+                    </a>
+                </div>
+                `
+                html += gridElement
+            })
+            randomItems.innerHTML = html;
+        });
+    })
+}
+
+getRandom();
 </script>
 
 <script>
@@ -511,7 +543,11 @@ const openModal = (id) => {
 })
 
 favoriteButton.addEventListener('click', (e) => {
-	saveItem(e)
+  saveItem(e)
+})
+	
+shuffleButton.addEventListener('click', (e) => {
+  getRandom();
 })
 
 itemModal.addEventListener('click', (e) => {
