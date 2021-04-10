@@ -552,10 +552,8 @@ favoriteButton.addEventListener('click', (e) => {
   saveItem(e)
 })
 	
-randomItemsGrid.addEventListener('click', (e) => {
-  if(e.target.matches("#shuffleButton")) {
-	    getRandom();
-  }
+shuffleButton.addEventListener('click', (e) => {
+  getRandom();
 })
 
 itemModal.addEventListener('click', (e) => {
