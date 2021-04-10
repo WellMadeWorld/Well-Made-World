@@ -191,7 +191,7 @@ const getRandom = () => {
     let randomNums = []
     let html = ''
     while (randomNums.length < 3) {
-        let randomNum = Math.floor(Math.random() * 19);
+        let randomNum = Math.floor(Math.random() * 951);
         if(!(randomNums.includes(randomNum))) {
             randomNums.push(randomNum)
         }
@@ -202,7 +202,7 @@ const getRandom = () => {
         randomNumQuery.get()
         .then(function(querySnapshot) {
             querySnapshot.docs.forEach(doc => {
-                let data = doc.data();
+                let product = doc.data();
                 const gridElement = `
 	    <div class="ecommercewrapper">
             	<div class="gridstyleblock">
@@ -222,6 +222,8 @@ const getRandom = () => {
         });
     })
 }
+
+getRandom()
 </script>
 
 <script>
