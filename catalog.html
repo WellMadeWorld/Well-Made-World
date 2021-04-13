@@ -148,7 +148,8 @@ firebase.auth().onAuthStateChanged((user) => {
             const product = doc.data();
             if (banner === undefined) {
             const gridElement = `
-	    <div class="ecommercewrapper">
+	    <div>
+              <div class="ecommercewrapper">
             <div class="gridstyleblock">
                 <a href='#'>
                   <img src='${product.image_link}' class='catalog-image' id="${doc.id}" style="position: auto; width: auto; border-radius: 25px;">
@@ -159,6 +160,7 @@ firebase.auth().onAuthStateChanged((user) => {
 		  <div class="productprice">$${product.price}</div>
 		</div>
 	    </div>
+          </div>
             `
             html += gridElement
             } else {
@@ -180,6 +182,19 @@ firebase.auth().onAuthStateChanged((user) => {
             }
         })
         document.getElementById(category).innerHTML = html
+	let slider = tns({
+          container: '#' += category,
+          items: 4,
+          mode: 'carousel',
+          axis: 'horizontal',
+          slideBy: 'page',
+          controls: true,
+          speed: 300,
+          autoplay: false,
+          prevButton: '#' += category += 'sb',
+  	  nextButton: '#' += category += 'sf',
+          center: true
+      });
     } else {
         document.getElementById(category).innerHTML = 'no items in the catalog'
     }
