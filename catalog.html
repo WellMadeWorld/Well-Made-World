@@ -181,8 +181,6 @@ firebase.auth().onAuthStateChanged((user) => {
             html += gridElement
             }
         })
-	let slideBack = '#'.concat(category, 'sb')
-	let slideForward = '#'.concat(category, 'sf')
         document.getElementById(category).innerHTML = html
 	let slider = tns({
           container: document.getElementById(category),
@@ -193,8 +191,8 @@ firebase.auth().onAuthStateChanged((user) => {
           controls: true,
           speed: 300,
           autoplay: false,
-          prevButton: slideBack,
-  	  nextButton: slideForward,
+          prevButton: '#' + category + 'sb',
+  	  nextButton: '#' + category + 'sf',
           center: true
       });
     } else {
