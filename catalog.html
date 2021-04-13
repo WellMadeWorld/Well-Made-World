@@ -192,8 +192,7 @@ firebase.auth().onAuthStateChanged((user) => {
           speed: 300,
           autoplay: false,
           prevButton: '#' + category + 'sb',
-  	  nextButton: '#' + category + 'sf',
-          center: true
+  	  nextButton: '#' + category + 'sf'
       });
     } else {
         document.getElementById(category).innerHTML = 'no items in the catalog'
