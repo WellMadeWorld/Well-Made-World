@@ -181,8 +181,8 @@ firebase.auth().onAuthStateChanged((user) => {
             html += gridElement
             }
         })
-	let slideBack = document.getElementById(category += "sb")
-	let slideForward = document.getElementById(category += "sf")
+	let slideBack = '#'.concat(category, 'sb')
+	let slideForward = '#'.concat(category, 'sf')
         document.getElementById(category).innerHTML = html
 	let slider = tns({
           container: document.getElementById(category),
