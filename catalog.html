@@ -9,7 +9,7 @@ firebase.auth().onAuthStateChanged((user) => {
  <script>
    const getCatalog = () => {
       var catalogRef =  db.collection('new_catalog')
-      var newItemQuery = catalogRef.orderBy("name").limit(8);
+      var newItemQuery = catalogRef.orderBy("name").limit(16);
       newItemQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "newItemsGrid", "https://assets.website-files.com/6011846d13792869a7112a47/6011846d1379286222112cb5_Group%202248.png")
@@ -17,7 +17,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var trendingItemQuery = catalogRef.orderBy("clicks", "desc").limit(9);
+      var trendingItemQuery = catalogRef.orderBy("clicks", "desc").limit(16);
       trendingItemQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "trendingItemsGrid", "https://assets.website-files.com/6011846d13792869a7112a47/601d98f09e99733b131e10f1_nnn.svg")
@@ -25,7 +25,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var baggageItemQuery = catalogRef.where("item_category", "==", "Bags").limit(8);
+      var baggageItemQuery = catalogRef.where("item_category", "==", "Bags").limit(16);
       baggageItemQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "baggageItemsGrid")
@@ -33,7 +33,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var shoesItemQuery = catalogRef.where("item_category", "==", "Footware").limit(8);
+      var shoesItemQuery = catalogRef.where("item_category", "==", "Footware").limit(16);
       shoesItemQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "shoesItemGrid")
@@ -41,7 +41,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var mensFashionItemQuery = catalogRef.where("item_category", "==", "Men").limit(8);
+      var mensFashionItemQuery = catalogRef.where("gender", "==", "Mens").limit(16);
       mensFashionItemQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "mensFashionGrid")
@@ -49,7 +49,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var madeInUSAQuery = catalogRef.where("filter_tags.MadeInUSA", "==", true).limit(8);
+      var madeInUSAQuery = catalogRef.where("filter_tags.MadeInUSA", "==", true).limit(16);
       madeInUSAQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "madeInUSAGrid")
@@ -57,7 +57,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var madeInCanadaQuery = catalogRef.where("filter_tags.Made_in_Canada", "==", true).limit(8);
+      var madeInCanadaQuery = catalogRef.where("filter_tags.Made_in_Canada", "==", true).limit(16);
       madeInCanadaQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "madeInCanadaGrid")
@@ -65,7 +65,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var womenOwnedBusinessQuery = catalogRef.where("filter_tags.Women_Owned_Business", "==", true).limit(8);
+      var womenOwnedBusinessQuery = catalogRef.where("filter_tags.Women_Owned_Business", "==", true).limit(16);
       womenOwnedBusinessQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "womenOwnedBusinessGrid")
@@ -73,7 +73,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var productsThatGiveQuery = catalogRef.where("brand_id", "==", 'HMSJbKhExwwmVhHdNlJa').limit(8);
+      var productsThatGiveQuery = catalogRef.where("brand_id", "==", 'HMSJbKhExwwmVhHdNlJa').limit(16);
       productsThatGiveQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "productsThatGiveGrid")
@@ -81,7 +81,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var recycledPlasticQuery = catalogRef.where("filter_tags.recycled_plastic", "==", true).limit(8);
+      var recycledPlasticQuery = catalogRef.where("filter_tags.recycled_plastic", "==", true).limit(16);
       recycledPlasticQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "recycledPlasticGrid")
@@ -89,7 +89,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var recycledCottonQuery = catalogRef.where("filter_tags.recycled_cotton", "==", true).limit(8);
+      var recycledCottonQuery = catalogRef.where("filter_tags.recycled_cotton", "==", true).limit(16);
       recycledCottonQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "recycledCottonGrid")
@@ -97,7 +97,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var plasticFreeItemsQuery = catalogRef.where("filter_tags.Plastic_Free", "==", true).limit(8);
+      var plasticFreeItemsQuery = catalogRef.where("filter_tags.Plastic_Free", "==", true).limit(16);
       plasticFreeItemsQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "plasticFreeItemsGrid")
@@ -105,7 +105,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var biodegradableItemsQuery = catalogRef.where("filter_tags.biodegradable", "==", true).limit(8);
+      var biodegradableItemsQuery = catalogRef.where("filter_tags.biodegradable", "==", true).limit(16);
       biodegradableItemsQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "biodegradableItemsGrid")
@@ -113,7 +113,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var refillableItemsQuery = catalogRef.where("filter_tags.Refillable", "==", true).limit(8);
+      var refillableItemsQuery = catalogRef.where("filter_tags.Refillable", "==", true).limit(16);
       refillableItemsQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "refillableItemsGrid")
@@ -121,7 +121,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var crueltyFreeItemsQuery = catalogRef.where("filter_tags.cruelty_free", "==", true).limit(8);
+      var crueltyFreeItemsQuery = catalogRef.where("filter_tags.cruelty_free", "==", true).limit(16);
      crueltyFreeItemsQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "crueltyFreeItemsGrid")
@@ -129,10 +129,15 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var veganItemsQuery = catalogRef.where("filter_tags.vegan", "==", true).limit(8);
+      var veganItemsQuery = catalogRef.where("filter_tags.vegan", "==", true).limit(16);
      veganItemsQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "veganItemsGrid")
+      })
+      var womensFashionQuery = catalogRef.where("gender", "==", "Womens").limit(16);
+     womensFashionQuery.get()
+      .then((querySnapshot) => {
+          setupQueryItems(querySnapshot.docs, "womensFashionGrid")
       })
       .catch((error) => {
           console.log("Error getting documents: ", error);
