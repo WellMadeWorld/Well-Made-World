@@ -181,9 +181,11 @@ firebase.auth().onAuthStateChanged((user) => {
             html += gridElement
             }
         })
+	let slideBack = document.getElementById(category += "sb")
+	let slideForward = document.getElementById(category += "sf")
         document.getElementById(category).innerHTML = html
 	let slider = tns({
-          container: '#' += category,
+          container: document.getElementById(category),
           items: 4,
           mode: 'carousel',
           axis: 'horizontal',
@@ -191,8 +193,8 @@ firebase.auth().onAuthStateChanged((user) => {
           controls: true,
           speed: 300,
           autoplay: false,
-          prevButton: '#' += category += 'sb',
-  	  nextButton: '#' += category += 'sf',
+          prevButton: slideBack,
+  	  nextButton: slideForward,
           center: true
       });
     } else {
