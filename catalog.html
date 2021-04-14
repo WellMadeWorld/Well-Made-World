@@ -199,7 +199,18 @@ firebase.auth().onAuthStateChanged((user) => {
           speed: 300,
           autoplay: false,
           prevButton: '#' + category + 'sb',
-  	  nextButton: '#' + category + 'sf'
+  	  nextButton: '#' + category + 'sf',
+	  responsive: {
+	      1200: {
+		items: 5
+	      },
+	      900: {
+		items: 4
+	      },
+	      600: {
+		items: 3
+	      }
+	    }
       });
     } else {
         document.getElementById(category).innerHTML = 'no items in the catalog'
