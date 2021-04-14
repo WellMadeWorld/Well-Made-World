@@ -463,8 +463,7 @@ let categoryClicks = {}
 function getRecommendations() { 
     auth.onAuthStateChanged(user =>  {
         if (user) {
-	    recommendedHeader.style.display = "block";
-	    recommendedGrid.style.display = "flex";
+	    recommendedContainer.style.display = 'block'
             var docRef = db.collection('users').doc(user.uid).collection('users_item_clicks')
             var topItems = docRef.orderBy("clicks", "desc").limit(6);
             topItems.get()
@@ -487,8 +486,7 @@ function getRecommendations() {
                 console.log("Error getting document:", error);
             });
         } else {
-	  recommendedHeader.style.display = "none";
-	  recommendedGrid.style.display = "none";	
+	  recommendedContainer.style.display = "none";
 	}
     }) 
 }
@@ -515,17 +513,19 @@ const setupRecommendations = () => {
             querySnapshot.docs.forEach(doc => {
                 product = doc.data()
                 const gridElement = `
-	    <div class="ecommercewrapper">
-            <div class="gridstyleblock">
-                <a href='#'>
-                  <img src='${product.image_link}' class='catalog-image' id="${doc.id}" style="position: auto; width: auto; border-radius: 25px;">
-                </a>
-             </div>
-		<div class="name-price" style="display: block; opacity: 0; width: 200px; height: 0px;">
-		  <div class="productname">${product.name}</div>
-		  <div class="productprice">$${product.price}</div>
+		<div>
+		    <div class="ecommercewrapper">
+		    <div class="gridstyleblock">
+			<a href='#'>
+			  <img src='${product.image_link}' class='catalog-image' id="${doc.id}" style="position: auto; width: auto; border-radius: 25px;">
+			</a>
+		     </div>
+			<div class="name-price" style="display: block; opacity: 0; width: 200px; height: 0px;">
+			  <div class="productname">${product.name}</div>
+			  <div class="productprice">$${product.price}</div>
+			</div>
+		    </div>
 		</div>
-	    </div>
             `
             html += gridElement
             })
