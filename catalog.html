@@ -151,11 +151,7 @@ firebase.auth().onAuthStateChanged((user) => {
         let html = ''
         data.forEach(doc => {
             const product = doc.data();
-            if (banner === undefined) {
-	    const gridElement = `
-	    <div class="hoverwrapper"><div data-w-id="b19cc609-7317-2dc7-73a1-99ed203c8d6a" class="newhover"><div class="gridstyleblock"></div><div class="hoverprice" style="width: 60px; height: 45px;"><div class="text-block-159" style="display: none; opacity: 1; width: 100%; height: 20px;">Product Name</div><div class="p">$120</div></div><div class="buttonwrapper" style="opacity: 0;"><div class="div-block-656"></div><div data-w-id="49c6e3ad-10b0-1d3b-0e99-b1cba82b803a" class="div-block-657"></div><div class="div-block-660"><div class="text-block-160">Buy from Allbirds</div><div data-w-id="3a1beb0b-96d0-dc66-e0c5-86a896ef93e1" data-animation-type="lottie" data-src="https://assets.website-files.com/6023ff93df997b7095fe52c6/6053ebf2903f384b4bc09a38_lf30_editor_cucjot5x.json" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="1.1" data-duration="0" class="lottie-animation-44"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500" preserveAspectRatio="xMidYMid meet" style="width: 100%; height: 100%; transform: translate3d(0px, 0px, 0px);"><defs><clipPath id="__lottie_element_2"><rect width="500" height="500" x="0" y="0"></rect></clipPath></defs><g clip-path="url(#__lottie_element_2)"><g transform="matrix(1,0,0,1,117.40400695800781,234.5607452392578)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(1,0,0,1,132.5959930419922,101.95500183105469)"><path stroke-linecap="round" stroke-linejoin="round" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="1" stroke-width="30" d=" M57.59600067138672,-26.954999923706055 C57.59600067138672,-26.954999923706055 -0.0010000000474974513,26.954999923706055 -0.0010000000474974513,26.954999923706055 C-0.0010000000474974513,26.954999923706055 -57.59700012207031,-26.954999923706055 -57.59700012207031,-26.954999923706055"></path></g></g><g transform="matrix(1,0,0,1,177.40399169921875,215.9377899169922)" opacity="0.8" style="display: block;"><g opacity="1" transform="matrix(1,0,0,1,72.59600067138672,41.95500183105469)"><path stroke-linecap="round" stroke-linejoin="round" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="1" stroke-width="30" d=" M57.59600067138672,-26.954999923706055 C57.59600067138672,-26.954999923706055 -0.0010000000474974513,26.954999923706055 -0.0010000000474974513,26.954999923706055 C-0.0010000000474974513,26.954999923706055 -57.59700012207031,-26.954999923706055 -57.59700012207031,-26.954999923706055"></path></g></g><g transform="matrix(1,0,0,1,177.40399169921875,138.177978515625)" opacity="0.5" style="display: block;"><g opacity="1" transform="matrix(1,0,0,1,72.59600067138672,41.95500183105469)"><path stroke-linecap="round" stroke-linejoin="round" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="1" stroke-width="30" d=" M57.59600067138672,-26.95599937438965 C57.59600067138672,-26.95599937438965 -0.0010000000474974513,26.95599937438965 -0.0010000000474974513,26.95599937438965 C-0.0010000000474974513,26.95599937438965 -57.59700012207031,-26.95599937438965 -57.59700012207031,-26.95599937438965"></path></g></g></g></svg></div></div></div></div></div>
-	    `
-	    /*		    
+            if (banner === undefined) {    
             const gridElement = `
 	    <div>
               <div class="hoverwrapper">
@@ -184,7 +180,6 @@ firebase.auth().onAuthStateChanged((user) => {
 	    </div>
 	  </div>
             `
-	    */
             html += gridElement
             } else {
             const gridElement = `
