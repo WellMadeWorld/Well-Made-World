@@ -113,7 +113,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var refillableItemsQuery = catalogRef.where("filter_tags.Refillable", "==", true).limit(16);
+      var refillableItemsQuery = catalogRef.where("filter_tags.reusable_and_refillable", "==", true).limit(16);
       refillableItemsQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "refillableItemsGrid")
