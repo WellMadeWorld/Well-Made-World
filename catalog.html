@@ -530,18 +530,6 @@ const setupRecommendations = () => {
             html += gridElement
             })
             recommendedGrid.innerHTML = html;
-	    let slider = tns({
-		  container: '#recommendedGrid',
-		  items: 4,
-		  mode: 'carousel',
-		  axis: 'horizontal',
-		  slideBy: 'page',
-		  controls: true,
-		  speed: 300,
-		  autoplay: false,
-		  prevButton: '#recommendedGridsb',
-		  nextButton: '#recommendedGridsf'
-	    })
         }).catch(function(error) {
             console.log("Error getting document:", error);
         });
