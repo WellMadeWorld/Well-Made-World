@@ -534,7 +534,10 @@ const setupRecommendations = () => {
             html += gridElement
             })
             recommendedGrid.innerHTML = html;
-		let slider = tns({
+        }).catch(function(error) {
+            console.log("Error getting document:", error);
+        });
+	    let slider = tns({
           container: "#recommendedGrid",
           items: 4,
           mode: 'carousel',
@@ -546,9 +549,6 @@ const setupRecommendations = () => {
           prevButton: '#recommendedGridsb',
   	  nextButton: '#recommendedGridsf'
       });
-        }).catch(function(error) {
-            console.log("Error getting document:", error);
-        });
     })
 }
 
