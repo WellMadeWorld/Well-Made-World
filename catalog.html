@@ -346,13 +346,17 @@ const brandHeaders = (brand) => {
 	    brandPeople.innerHTML = `${data.the_people}`
 	    brandProducts.innerHTML = `${data.the_products}`
 	    if (data.media_1 == "") {
-		    modalVideoContainer.innerHTML = ''
+		    modalVideoOne.innerHTML = ''
 	    } else {
-		    modalVideoContainer.innerHTML = `<iframe width="420" height="345" src="https://www.youtube.com/embed/${data.media_1}">
-	      </iframe><iframe width="420" height="345" src="https://www.youtube.com/embed/${data.media_2}">
-              </iframe>`
+		    modalVideoOne.innerHTML = `<iframe width="420" height="345" src="https://www.youtube.com/embed/${data.media_1}">
+	      </iframe>`
 	    }
-	    
+	    if (data.media_2 == "") {
+		    modalVideoTwo.innerHTML = ''
+	    } else {
+		    modalVideoTwo.innerHTML = `<iframe width="420" height="345" src="https://www.youtube.com/embed/${data.media_2}">
+	      </iframe>`
+	    }
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
