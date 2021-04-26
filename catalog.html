@@ -211,6 +211,8 @@ firebase.auth().onAuthStateChanged((user) => {
           autoplay: false,
           prevButton: '#' + category + 'sb',
   	  nextButton: '#' + category + 'sf',
+	  lazyload: true,
+	  lazyloadSelector: 'catalog-image',
 	  responsive: {
 	      1450: {
 		items: 5
