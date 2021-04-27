@@ -395,6 +395,40 @@ const updateClicks = (item) => {
     });
 }
 
+const setupTags = (data, id) => {
+  let itemTags = []
+  var category = data.product_category
+  if(category == 'Fashion-Apparel-Filter') {
+  itemTags.push('Fashion & Apparel')
+  } else if (category == 'Personal-Care-Filter') {
+  itemTags.push('Personal Care')
+  } else if (category == 'Home-Lifestyle-Filter') {
+  itemTags.push('Home & Lifestyle')
+  } else if (category == 'Household-Cleaning-Fitler') {
+  itemTags.push('Household Cleaning')
+  }
+  itemTags.push(data.item_category)
+  for (var key in data.filter_tags) {
+  	itemTags.push(key.split('_').join(' '))
+  }
+  firstTagContainer.innerHTML = `<div class="catalog-filter-button-1 product">${itemTags[0]}</div>
+  <div class="catalog-filter-button-1 product">${itemTags[1]}</div>`
+  
+  let html = ''
+  for (i=2; i < itemTags.length; i++) {
+  	html += `<div class="catalog-filter-button-1 product">${itemTags[i]}</div>`
+  }
+  secondTagContainer.innerHTML = html
+}
+
+const changeThumbnailImage = (src) => {
+	itemImage.innerHTML = 	`
+    <div id="product-image">
+        <img src="${src}" style="height: auto; width: auto;"/>
+    </div>
+    `
+}
+
 favoriteButtonContainer.addEventListener('click', (e) => {
   if(e.target.matches(".favorite-button")) {
     saveItem(e)
