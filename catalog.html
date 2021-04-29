@@ -234,44 +234,6 @@ firebase.auth().onAuthStateChanged((user) => {
 }
 
 getCatalog();
-
-const getRandom = () => {
-    let randomNums = []
-    let html = ''
-    while (randomNums.length < 3) {
-        let randomNum = Math.floor(Math.random() * 951);
-        if(!(randomNums.includes(randomNum))) {
-            randomNums.push(randomNum)
-        }
-    }
-    randomNums.forEach(num => {
-        var productsRef = db.collection('new_catalog')
-        var randomNumQuery = productsRef.where("product_num", "==", num);
-        randomNumQuery.get()
-        .then(function(querySnapshot) {
-            querySnapshot.docs.forEach(doc => {
-                let product = doc.data();
-                const gridElement = `
-	    <div class="ecommercewrapper">
-            	<div class="gridstyleblock">
-                <a href='#'>
-                  <img src='${product.image_link}' class='catalog-image' id="${doc.id}" style="position: auto; width: auto; border-radius: 25px;">
-                </a>
-             	</div>
-		<div class="name-price" style="display: block; opacity: 0; width: 200px; height: 0px;">
-		  <div class="productname">${product.name}</div>
-		  <div class="productprice">$${product.price}</div>
-		</div>
-	    </div>
-            `
-            html += gridElement
-            })
-            randomItemsGrid.innerHTML = html
-        });
-    })
-}
-
-getRandom()
 </script>
 
 <script>
