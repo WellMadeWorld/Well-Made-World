@@ -165,7 +165,7 @@ firebase.auth().onAuthStateChanged((user) => {
 		    <div class="text-block-171">${product.name}</div>
 		    <div class="text-block-172">${product.brand}</div>
 		  </div>
-		  <div class="p _2">${product.price}</div>
+		  <div class="p _2">$${product.price}</div>
 		</div>
               </div>
 	  </div>
@@ -174,18 +174,20 @@ firebase.auth().onAuthStateChanged((user) => {
             } else {
             const gridElement = `
 	    <div>
-		    <div class="ecommercewrapper">
+		    <div data-w-id="b19cc609-7317-2dc7-73a1-99ed203c8d6a" class="ecommercewrapper">
 		    <div class='gridstyleblock'>
 			<img data-src="${banner}" loading="lazy" width="55" alt class="new" style="position: absolute; z-index: 1;">
 			<a href='#' class="modal-trigger" data-target="modal-product">
 			  <img data-src='${product.image_link}' class='catalog-image' id="${doc.id}" style="position: relative; z-index: 0; border-radius: 25px; width: auto;">
 			</a>
+		    <div class="productinfoblockmorph">
+		      <div>
+		        <div class="text-block-171">${product.name}</div>
+		        <div class="text-block-172">${product.brand}</div>
+		      </div>
+		    <div class="p _2">$${product.price}</div>
 		    </div>
-		      <div class="name-price" style="display: block; opacity: 0; width: 200px; height: 0px;">
-			  <div class="productname">${product.name}</div>
-			  <div class="productprice">$${product.price}</div>
-			</div>
-		    </div>
+                </div>
 	    </div>
             `
             html += gridElement
