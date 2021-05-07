@@ -153,6 +153,7 @@ firebase.auth().onAuthStateChanged((user) => {
             const product = doc.data();
             if (banner === undefined) {    
             const gridElement = `
+	      <div>
 		<div class="ecommercewrapper">
                   <div class="gridstyleblock">
                     <a href='#'>
@@ -171,6 +172,7 @@ firebase.auth().onAuthStateChanged((user) => {
 		  <div class="p _2">$${product.price}</div>
 		</div>
               </div>
+	    </div>
             `
             html += gridElement
             } else {
