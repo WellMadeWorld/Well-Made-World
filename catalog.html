@@ -153,8 +153,7 @@ firebase.auth().onAuthStateChanged((user) => {
             const product = doc.data();
             if (banner === undefined) {    
             const gridElement = `
-	    <div>
-		<div data-w-id="b19cc609-7317-2dc7-73a1-99ed203c8d6a" class="ecommercewrapper">
+		<div class="ecommercewrapper">
                   <div class="gridstyleblock">
                     <a href='#'>
                       <img data-src='${product.image_link}' class='catalog-image' id="${doc.id}" style="position: auto; width: auto; border-radius: 25px;">
@@ -163,7 +162,7 @@ firebase.auth().onAuthStateChanged((user) => {
 		<div class="productinfoblockmorph">
 		  <div>
 		    <div class="loopwrapper">
-		      <div class="loopcontainer">
+		      <div class="loopcontainer" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
 		        <div class="text-block-171">${product.name}</div>
 		      </div>
 		    </div>
@@ -172,7 +171,6 @@ firebase.auth().onAuthStateChanged((user) => {
 		  <div class="p _2">$${product.price}</div>
 		</div>
               </div>
-	  </div>
             `
             html += gridElement
             } else {
