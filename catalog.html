@@ -65,7 +65,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var womenOwnedBusinessQuery = catalogRef.where("filter_tags.Women_Owned_Business", "==", true).limit(16);
+      var womenOwnedBusinessQuery = catalogRef.where("filter_tags", "array-contains", 'Women_Owned_Business').limit(16);
       womenOwnedBusinessQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "womenOwnedBusinessGrid")
@@ -81,7 +81,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var recycledPlasticQuery = catalogRef.where("filter_tags.recycled_plastic", "==", true).limit(16);
+      var recycledPlasticQuery = catalogRef.where("filter_tags", "array-contains", 'recycled_plastic').limit(16);
       recycledPlasticQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "recycledPlasticGrid")
@@ -89,7 +89,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var recycledCottonQuery = catalogRef.where("filter_tags.recycled_cotton", "==", true).limit(16);
+      var recycledCottonQuery = catalogRef.where("filter_tags", "array-contains", 'recycled_cotton').limit(16);
       recycledCottonQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "recycledCottonGrid")
@@ -97,7 +97,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var plasticFreeItemsQuery = catalogRef.where("filter_tags.Plastic_Free", "==", true).limit(16);
+      var plasticFreeItemsQuery = catalogRef.where("filter_tags", "array-contains", 'Plastic_Free').limit(16);
       plasticFreeItemsQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "plasticFreeItemsGrid")
@@ -105,7 +105,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var biodegradableItemsQuery = catalogRef.where("filter_tags.biodegradable", "==", true).limit(16);
+      var biodegradableItemsQuery = catalogRef.where("filter_tags", "array-contains", 'biodegradable').limit(16);
       biodegradableItemsQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "biodegradableItemsGrid")
@@ -113,7 +113,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var refillableItemsQuery = catalogRef.where("filter_tags.reusable_and_refillable", "==", true).limit(16);
+      var refillableItemsQuery = catalogRef.where("filter_tags", "array-contains", 'reusable_and_refillable').limit(16);
       refillableItemsQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "refillableItemsGrid")
@@ -121,7 +121,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var crueltyFreeItemsQuery = catalogRef.where("filter_tags.cruelty_free", "==", true).limit(16);
+      var crueltyFreeItemsQuery = catalogRef.where("filter_tags", "array-contains", 'cruelty_free').limit(16);
      crueltyFreeItemsQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "crueltyFreeItemsGrid")
@@ -129,7 +129,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var veganItemsQuery = catalogRef.where("filter_tags.vegan", "==", true).limit(16);
+      var veganItemsQuery = catalogRef.where("filter_tags", "array-contains", 'vegan').limit(16);
      veganItemsQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "veganItemsGrid")
