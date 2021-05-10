@@ -581,10 +581,6 @@ const openModal = (id) => {
     }
 })
 
-favoriteButton.addEventListener('click', (e) => {
-  saveItem(e)
-})
-
 itemModal.addEventListener('click', (e) => {
   if(e.target.matches('.catalog-image')) {
     $('.modal').fadeOut();
@@ -600,47 +596,6 @@ modalThumbnailImages.addEventListener('click', (e) => {
   }
 })
 	
-favoriteItemsGrid.addEventListener('click', (e) => {
-  if(e.target.matches('.catalog-image')) {
-    openModal(e.target.id)
-  }
-})
-</script>
-
-<script>
-const getUserFavorites = () => {
-    auth.onAuthStateChanged(user =>  {
-        if (user) {
-            var userFavorites = db.collection('users').doc(user.uid).collection('users_favorites');
-            userFavorites.get()
-            .then((querySnapshot) => {
-                setupFavorites(querySnapshot.docs)
-            })
-        }
-    })
-}
-
-getUserFavorites();
-
-const setupFavorites = (data) => {
-  if (data.length) {
-  let html = ''
-  data.forEach(doc => {
-    const product = doc.data();
-      const gridElement = `
-        <div class='gridstyleblock'>
-	  <a href='#' class="modal-trigger" data-target="modal-product">
-	  <img src='${product.image_link}' class='catalog-image' id="${doc.id}" style="border-radius: 25px;">
-          </a>
-        </div>
-  `
-  html += gridElement
-  })
-  favoriteItemsGrid.innerHTML = html
-  } else {
-    favoriteItemsGrid.innerHTML = 'Start favoriting to start your list'
-  }
-}
 </script>
 
 <script>
