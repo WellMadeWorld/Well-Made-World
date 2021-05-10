@@ -49,7 +49,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var madeInUSAQuery = catalogRef.where("filter_tags.MadeInUSA", "==", true).limit(16);
+      var madeInUSAQuery = catalogRef.where("filter_tags", "array-contains", 'MadeInUSA').limit(16);
       madeInUSAQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "madeInUSAGrid")
