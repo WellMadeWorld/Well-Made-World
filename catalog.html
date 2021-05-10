@@ -57,7 +57,7 @@ firebase.auth().onAuthStateChanged((user) => {
       .catch((error) => {
           console.log("Error getting documents: ", error);
       });
-      var madeInCanadaQuery = catalogRef.where("filter_tags.Made_in_Canada", "==", true).limit(16);
+      var madeInCanadaQuery = catalogRef.where("filter_tags", "array-contains", 'Made_in_Canada').limit(16);
       madeInCanadaQuery.get()
       .then((querySnapshot) => {
           setupQueryItems(querySnapshot.docs, "madeInCanadaGrid")
