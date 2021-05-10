@@ -151,6 +151,10 @@ firebase.auth().onAuthStateChanged((user) => {
         let html = ''
         data.forEach(doc => {
             const product = doc.data();
+	    let classname = 'text-block-171'
+	    if (product.name.length < 19) {
+		classname = 'nonscroller'    
+	    }
             if (banner === undefined) {    
             const gridElement = `
 	      <div>
@@ -164,7 +168,7 @@ firebase.auth().onAuthStateChanged((user) => {
 		  <div>
 		    <div class="loopwrapper">
 			<div class="loopcontainer">
-		      	  <div class="text-block-171">${product.name}</div>
+		      	  <div class="${classname}">${product.name}</div>
 			</div>
 		    </div>
 		    <div class="text-block-172">${product.brand}</div>
@@ -187,11 +191,15 @@ firebase.auth().onAuthStateChanged((user) => {
 		    </div>
 		    <div class="productinfoblockmorph">
 		      <div>
-		        <div class="text-block-171">${product.name}</div>
+		        <div class="loopwrapper">
+			  <div class="loopcontainer">
+		      	    <div class="${classname}">${product.name}</div>
+			  </div>
+		        </div>
 		        <div class="text-block-172">${product.brand}</div>
 		      </div>
 		    <div class="p _2">$${product.price}</div>
-		    </div>
+		  </div>
                 </div>
 	    </div>
             `
