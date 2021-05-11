@@ -554,24 +554,26 @@ const setupRecommendations = () => {
         axis: 'horizontal',
         slideBy: 'page',
         controls: true,
+	prevButton: '#recommendedGridsb',
+	nextButton: '#recommendedGridsf',
         speed: 300,
-    nav: false,
+    	nav: false,
         autoplay: false,
-    lazyload: true,
-    lazyloadSelector: 'catalog-image',
+    	lazyload: true,
+    	lazyloadSelector: 'catalog-image',
     responsive: {
-        1450: {
+	1450: {
       items: 5
-        },
-        1100: {
+	},
+	1100: {
       items: 4
-        },
-        800: {
+	},
+	800: {
       items: 3
-        },
-        500: {
+	},
+	500: {
       items: 2      
-        }
+	}
       }
     });
 }
