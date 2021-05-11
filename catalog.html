@@ -542,17 +542,33 @@ const setupRecommendations = () => {
             html += gridElement
             })
             recommendedGrid.innerHTML = html;
-	    let slider = tns({
-	  container: "#recommendedGrid",
-	  items: 4,
-	  mode: 'carousel',
-	  axis: 'horizontal',
-	  slideBy: 'page',
-	  controls: true,
-	  speed: 300,
-	  autoplay: false,
-	  prevButton: '#recommendedGridsb',
-	  nextButton: '#recommendedGridsf'
+	   let slider = tns({
+          container: document.getElementById('recommendedGrid'),
+          items: 4,
+          mode: 'carousel',
+          axis: 'horizontal',
+          slideBy: 'page',
+          controls: true,
+          speed: 300,
+          autoplay: false,
+          prevButton: '#recommendedGridsb',
+  	  nextButton: '#recommendedGridsf',
+	  lazyload: true,
+	  lazyloadSelector: 'catalog-image',
+	  responsive: {
+	      1450: {
+		items: 5
+	      },
+	      1100: {
+		items: 4
+	      },
+	      800: {
+		items: 3
+	      },
+	      500: {
+		items: 2      
+	      }
+	    }
       });
         }).catch(function(error) {
             console.log("Error getting document:", error);
