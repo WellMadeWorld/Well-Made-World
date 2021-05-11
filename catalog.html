@@ -514,33 +514,40 @@ const setupRecommendations = () => {
                 product = doc.data()
                 const gridElement = `
 		<div>
-		    <div class="ecommercewrapper">
-		    <div class="gridstyleblock">
-			<a href='#'>
-			  <img src='${product.image_link}' class='catalog-image' id="${doc.id}" style="position: auto; width: auto; border-radius: 25px;">
-			</a>
-		     </div>
-			<div class="name-price" style="display: block; opacity: 0; width: 200px; height: 0px;">
-			  <div class="productname">${product.name}</div>
-			  <div class="productprice">$${product.price}</div>
+		<div class="ecommercewrapper">
+                  <div class="gridstyleblock">
+                    <a href='#'>
+                      <img data-src='${product.image_link}' class='catalog-image' id="${doc.id}" style="position: auto; width: auto; border-radius: 25px;">
+                    </a>
+                  </div>
+		<div class="productinfoblockmorph">
+		  <div>
+		    <div class="loopwrapper">
+			<div class="loopcontainer">
+		      	  <div class="${classname}">${product.name}</div>
 			</div>
 		    </div>
+		    <div class="text-block-172">${product.brand}</div>
+		  </div>
+		  <div class="p _2">$${product.price}</div>
 		</div>
+              </div>
+	    </div>
             `
             html += gridElement
             })
             recommendedGrid.innerHTML = html;
-		let slider2 = tns({
-          container: "#recommendedGrid",
-          items: 4,
-          mode: 'carousel',
-          axis: 'horizontal',
-          slideBy: 'page',
-          controls: false,
-          speed: 300,
-          autoplay: false,
-          prevButton: '#recommendedGridsb',
-  	  nextButton: '#recommendedGridsf'
+	    let slider = tns({
+	  container: "#recommendedGrid",
+	  items: 4,
+	  mode: 'carousel',
+	  axis: 'horizontal',
+	  slideBy: 'page',
+	  controls: false,
+	  speed: 300,
+	  autoplay: false,
+	  prevButton: '#recommendedGridsb',
+	  nextButton: '#recommendedGridsf'
       });
         }).catch(function(error) {
             console.log("Error getting document:", error);
