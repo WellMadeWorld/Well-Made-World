@@ -608,6 +608,12 @@ const openModal = (id) => {
     }
 })
 
+favoriteButtonContainer.addEventListener('click', (e) => {
+  if(e.target.matches(".favorite-button")) {
+    saveItem(e)
+  }
+})
+	
 itemModal.addEventListener('click', (e) => {
   if(e.target.matches('.catalog-image')) {
     $('.modal').fadeOut();
