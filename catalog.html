@@ -543,39 +543,36 @@ const setupRecommendations = () => {
             html += gridElement
             })
             recommendedGrid.innerHTML = html;
-        }).catch(function(error) {
-            console.log("Error getting document:", error);
-        });
+	    let slider = tns({
+		container: document.getElementById('recommendedGrid'),
+		items: 4,
+		mode: 'carousel',
+		axis: 'horizontal',
+		slideBy: 'page',
+		controls: true,
+		prevButton: '#recommendedGridsb',
+		nextButton: '#recommendedGridsf',
+		speed: 300,
+		nav: false,
+		autoplay: false,
+		lazyload: true,
+		lazyloadSelector: 'catalog-image',
+	    responsive: {
+		1450: {
+	      items: 5
+		},
+		1100: {
+	      items: 4
+		},
+		800: {
+	      items: 3
+		},
+		500: {
+	      items: 2      
+		}
+	      }
+	    });
     })
-    let slider = tns({
-        container: document.getElementById('recommendedGrid'),
-        items: 4,
-        mode: 'carousel',
-        axis: 'horizontal',
-        slideBy: 'page',
-        controls: true,
-	prevButton: '#recommendedGridsb',
-	nextButton: '#recommendedGridsf',
-        speed: 300,
-    	nav: false,
-        autoplay: false,
-    	lazyload: true,
-    	lazyloadSelector: 'catalog-image',
-    responsive: {
-	1450: {
-      items: 5
-	},
-	1100: {
-      items: 4
-	},
-	800: {
-      items: 3
-	},
-	500: {
-      items: 2      
-	}
-      }
-    });
 }
 
 const openModal = (id) => {
