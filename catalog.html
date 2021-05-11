@@ -512,6 +512,10 @@ const setupRecommendations = () => {
         .then((querySnapshot) => {
             querySnapshot.docs.forEach(doc => {
                 product = doc.data()
+		let classname = 'text-block-171'
+	        if (product.name.length < 19) {
+		  classname = 'nonscroller'    
+	        }
                 const gridElement = `
 		<div>
 		<div class="ecommercewrapper">
