@@ -364,59 +364,6 @@ const brandHeaders = (brand) => {
     });
 }
 
-const saveItem = (e) => {
-    var docID = e.target.id.substring(11, e.target.id.length)
-    auth.onAuthStateChanged(user =>  {
-        if (user) {
-        
-        //Get a list of the IDs currently inside the user favorites document
-        let document_ids = []
-    
-        db.collection("users").doc(user.uid).collection('users_favorites').get().then(function(querySnapshot) {
-            querySnapshot.forEach(function(doc) {
-                document_ids.push(doc.id);
-            });
-        });
-        
-        var item = db.collection("new_catalog").doc(docID)
-        var currentDoc = db.collection('users').doc(user.uid).collection('users_favorites').doc(docID)
-        item.get().then(function(doc) {
-            if(document_ids.includes(docID)) {
-                currentDoc.delete();
-            } else {
-                currentDoc.set(doc.data())
-            }
-            checkSavedStatus(docID)
-	    getUserFavorites()
-        })
-
-        } else {
-            console.log('user not logged in.')
-        }
-    })
-}
-
-const checkSavedStatus = (docID) => {
-    auth.onAuthStateChanged(user =>  {
-        if (user) {
-            var userFavs = db.collection('users').doc(user.uid).collection('users_favorites');
-            userFavs.get().then(function(snapShot) {
-                userFavoriteList = [];
-                snapShot.docs.forEach(doc => {
-                    userFavoriteList.push(doc.id)
-                })
-		console.log(docID)
-		console.log(userFavoriteList)
-                if (userFavoriteList.includes(docID)) {
-                    favoriteButton.innerHTML = `<div class="favoriteactivated" id="saveButton_${docID}" style="display: block;"></div>`
-                } else {
-                    favoriteButton.innerHTML = `<div class="favoriteinactive" id="saveButton_${docID}" style="display: block;"></div>`
-                }
-            }) 
-        }
-    })
-}
-
 const updateClicks = (item) => {
     var docRef = db.collection('new_catalog').doc(item)
 
